@@ -19,12 +19,6 @@
 	on update restrict
 	);
 
-	create table satisfacao(
-	id_satisfacao int not null primary key auto_increment,
-	nota_satisfacao int not null,
-	comentario_satisfacao varchar(25) not null
-	);
-
 	create table categoria(
 	id_categoria int not null primary key auto_increment,
 	nome_categoria varchar(50) not null
@@ -63,7 +57,8 @@
 	fk_id_produto int not null,
 	quantidade int not null,
 	valor_total decimal(10,2) not null,
-	fk_id_satisfacao int not null,
+	nota_satisfacao int not null,
+    comentario_satisfacao varchar(25),
 	fk_id_tipo_pagamento int not null,
 	observacao varchar(100),
 
@@ -85,12 +80,6 @@
 	on delete restrict
 	on update restrict,
 
-	constraint fk_id_satisfacao
-	foreign key(fk_id_satisfacao)
-	references satisfacao(id_satisfacao)
-	on delete restrict
-	on update restrict,
-
 	constraint fk_id_tipo_pagamento
 	foreign key (fk_id_tipo_pagamento)
 	references tipo_pagamento(id_tipo_pagamento)
@@ -100,6 +89,9 @@
 
 	alter table registro
 	modify numero_pedido varchar(15) not null;
+    
+    alter table registro
+	add constraint chk_nota check (nota_satisfacao between 0 and 10);
 
 	delimiter $$
 	create trigger trg_numero_pedido
@@ -124,5 +116,40 @@
 	end$$
 
 	delimiter ;
+    
+    delimiter $$
+
+	create trigger trg_satisfacao_insert
+	before insert on registro
+	for each row
+	begin
+		if new.nota_satisfacao >= 6 then
+			set new.comentario_satisfacao = 'Muito Satisfeito';
+		elseif new.nota_satisfacao = 5 then
+			set new.comentario_satisfacao = 'Neutro';
+		else
+			set new.comentario_satisfacao = 'Muito Insatisfeito';
+		end if;
+	end$$
+
+	delimiter ;
+    
+    delimiter $$
+
+	create trigger trg_registro_update
+	before update on registro
+	for each row
+	begin
+		if new.nota_satisfacao >= 6 then
+			set new.comentario_satisfacao = 'Muito Satisfeito';
+		elseif new.nota_satisfacao = 5 then
+			set new.comentario_satisfacao = 'Neutro';
+		else
+			set new.comentario_satisfacao = 'Muito Insatisfeito';
+		end if;
+	end$$
+
+	delimiter ;
+
 
 
