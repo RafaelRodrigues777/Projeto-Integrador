@@ -44,50 +44,78 @@
   <div class="conteudo-principal">
 
     <header class="topbar">
-        <span class="topbar__titulo" id="nome-pagina-atual">Produtos</span>
+        <span class="topbar__titulo" id="nome-pagina-atual">Dashboard</span>
     </header>
 
     
     <main class="painel-conteudo">
 
-<!-- COMEÇA OS DROPS AQUI, ABAIXO É O QUE VAI DENTRO-->
+      <div class="cards-container">
+        <div class="card-dashboard">
+          <div>
+            <span class="card-titulo">Faturamento</span>
+            <h2>R$ 12.345</h2>
+          </div>
+        </div>
 
+        <div class="card-dashboard">
+          <div>
+            <span class="card-titulo">Pedidos</span>
+            <h2>156</h2>
+          </div>
+        </div>
 
+        <div class="card-dashboard">
+          <div>
+            <span class="card-titulo">Clientes</span>
+            <h2>89</h2>
+          </div>
+        </div>
+
+        <div class="card-dashboard">
+          <div>
+            <span class="card-titulo">Produtos</span>
+            <h2>234</h2>
+          </div>
+        </div>
+      </div>
       
-Z
+      <div style="gap:20px;">
 
+        <details class="painel-header" style="width:100%;" open>
+          <summary>Quais produtos mais vendem?</summary>
+          <div style="width:100%; height:300px;">
+            <canvas id="PrimeiroGrafico"></canvas>
+          </div>
+        </details>
 
-<!-- 
-      <div style="display:flex; flex-wrap:wrap; gap:20px;">
+        <details class="painel-header" style="width:100%;" open>
+          <summary>Quais vendedores geram mais receita?</summary>
+          <div style="width:100%; height:300px;">
+            <canvas id="SegundoGrafico"></canvas>
+          </div>
+        </details>
 
-        <div class="painel-header" style="width:48%;">
-          <div style="width: 800px; height: 300px">
-            <canvas id="PrimeiroGrafico" width="400" height="200"></canvas>
+        <details class="painel-header" style="width:100%;" open>
+          <summary>Quais regiões apresentam melhor desempenho?</summary>
+          <div style="width:100%; height:300px;">
+            <canvas id="TerceiroGrafico"></canvas>
           </div>
-        </div>
+        </details>
 
-        <div class="painel-header" style="width:48%;">
-          <div style="width: 800px; height: 300px">
-            <canvas id="SegundoGrafico" width="400" height="200"></canvas>
+        <details class="painel-header" style="width:100%;" open>
+          <summary>Existe relação entre faturamento e satisfação?</summary>
+          <div style="width:100%; height:300px;">
+            <canvas id="QuartoGrafico"></canvas>
           </div>
-        </div>
-        <div class="painel-header" style="width:48%;">
-          <div style="width: 800px; height: 300px">
-            <canvas id="TerceiroGrafico" width="400" height="200"></canvas>
-          </div>
-        </div>
-        <div class="painel-header" style="width:48%;">
-          <div style="width: 800px; height: 300px">
-            <canvas id="QuartoGrafico" width="400" height="200"></canvas>
-          </div>
-        </div>
-        <div style="width:100%; display:flex; justify-content:center;">
-          <div class="painel-header" style="width:48%;">
-            <div style="width:600px; height:800px;">
-              <canvas id="QuintoGrafico" width="400" height="200"></canvas>
+        </details>
+
+          <details class="painel-header" style="width:100%;" open>
+            <summary>Quinto Gráfico</summary>
+            <div style="width:100%; height:300px;">
+              <canvas id="QuintoGrafico"></canvas>
             </div>
-          </div>
-        </div>
+          </details>
 
       </div>
 
@@ -107,10 +135,10 @@ Z
             }]
           },
           options: {
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
-              y: {
-                beginAtZero: true
-              }
+              y: { beginAtZero: true }
             }
           }
         });
@@ -128,10 +156,10 @@ Z
             }]
           },
           options: {
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
-              y: {
-                beginAtZero: true
-              }
+              y: { beginAtZero: true }
             }
           }
         });
@@ -149,10 +177,10 @@ Z
             }]
           },
           options: {
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
-              y: {
-                beginAtZero: true
-              }
+              y: { beginAtZero: true }
             }
           }
         });
@@ -170,10 +198,10 @@ Z
             }]
           },
           options: {
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
-              y: {
-                beginAtZero: true
-              }
+              y: { beginAtZero: true }
             }
           }
         });
@@ -190,14 +218,14 @@ Z
             }]
           },
           options: {
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
-              y: {
-                beginAtZero: true
-              }
+              y: { beginAtZero: true }
             }
           }
         });
-      </script> -->
+      </script>
 
     </main>
 
