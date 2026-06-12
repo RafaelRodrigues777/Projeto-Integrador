@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Selecionar Tipo de Chamado - 4DeskSolutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      height: 100vh;
+      background-color: #f1f5f9;
+    }
+
+    .sidebar {
+      width: 260px;
+      background-color: #0f172a;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      padding: 30px 20px;
+      transition: width 0.3s ease, transform 0.3s ease;
+    }
+
+    .sidebar.collapsed {
+      width: 80px;
+    }
+
+    .sidebar .logo {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 40px;
+      text-align: center;
+      color: #38bdf8;
+    }
+
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      color: #cbd5e1;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover, .sidebar a.active {
+      background-color: #1e293b;
+      color: #fff;
+    }
+
+    .sidebar a i {
+      margin-right: 12px;
+      font-size: 16px;
+    }
+
+    .sidebar.collapsed a i {
+      margin-right: 0;
+      font-size: 24px;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .topbar {
+      background-color: #fff;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .topbar h1 {
+      font-size: 22px;
+      color: #1e293b;
+    }
+
+    .topbar .actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .topbar .actions button {
+      background-color: #0ea5e9;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .topbar .actions button:hover {
+      background-color: #0284c7;
+    }
+
+    .topbar .toggle-sidebar {
+      display: none;
+      cursor: pointer;
+      font-size: 24px;
+      color: #1e293b;
+    }
+
+    .content {
+      padding: 40px;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+    }
+
+    .card i {
+      font-size: 28px;
+      color: #0ea5e9;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: #1e293b;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #64748b;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+
+      .topbar .toggle-sidebar {
+        display: block;
+      }
+    }
+
+    .announcements {
+      border-left: 5px solid #0ea5e9;
+      background-color: #f9f9ff;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .announcements h2 {
+      margin-top: 0;
+      color: #0ea5e9;
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .announcement {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+    }
+
+    .announcement strong {
+      display: block;
+      font-size: 14px;
+      color: #1e3a8a;
+      margin-bottom: 5px;
+    }
+
+    .announcement p {
+      font-size: 14px;
+      color: #333;
+      margin: 5px 0;
+    }
+
+    .announcement .date {
+      font-size: 12px;
+      color: #666;
+    }
+      
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="logo">4DeskSolutions</div>
+    <a href="./externo_front.html"><i class="fas fa-house"></i> Home</a>
+    <a href="./noticias.html"><i class="fas fa-bullhorn"></i> Anúncios</a>
+    <a href="./faqs.html"><i class="fas fa-question-circle"></i> FAQ</a>
+    <a href="./pds1.html"><i class="fas fa-chart-bar"></i> Pesquisa de Satisfação</a>
+    <a href="./planos.html"><i class="fas fa-clipboard-list"></i> Planos de Serviço</a> <!-- NOVO LINK AQUI -->
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <h1>Selecione o tipo de chamado</h1>
+      <div class="actions">
+        <button onclick="window.location.href='./index.html'">Sair</button>
+        <button>Notificações</button>
+        <button>Configurações</button>
+      </div>
+      <div class="toggle-sidebar" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <div class="announcements">
+        <h2>📢 Announcements</h2>
+
+        <div class="announcement">
+          <strong>[PÚBLICO ALVO: TODOS] PROJUDI – O CAPTCHA PASSA A SER OBRIGATÓRIO PARA "ACESSO À ÍNTEGRA DOS AUTOS" E EXPORTAÇÃO DE PROCESSOS.</strong>
+          <p>O Captcha passa a ser obrigatório para "Acesso à íntegra dos autos" e Exportação de Processos. A partir de agora, será obrigatória a utilização de Captcha ao acessar a opção.</p>
+          <div class="date">15/05/2025 06:00 AM</div>
+        </div>
+
+        <div class="announcement">
+          <strong>[PÚBLICO ALVO: INTERNOS] SISTEMA SEEU – DESCONTINUIDADE DO ACESSO ATRAVÉS DE LOGIN E SENHA</strong>
+          <p>Usuários internos deverão utilizar autenticação integrada. O método tradicional será descontinuado.</p>
+          <div class="date">14/05/2025 09:00 AM</div>
+        </div>
+
+        <div class="announcement">
+          <strong>[PÚBLICO ALVO: INTERNOS] SISTEMA SEEU – DESCONTINUIDADE DO ACESSO ATRAVÉS DE LOGIN E SENHA</strong>
+          <p>Usuários internos deverão utilizar autenticação integrada. O método tradicional será descontinuado.</p>
+          <div class="date">14/05/2025 09:00 AM</div>
+        </div>
+
+        <div class="announcement">
+          <strong>[PÚBLICO ALVO: INTERNOS] SISTEMA SEEU – DESCONTINUIDADE DO ACESSO ATRAVÉS DE LOGIN E SENHA</strong>
+          <p>Usuários internos deverão utilizar autenticação integrada. O método tradicional será descontinuado.</p>
+          <div class="date">14/05/2025 09:00 AM</div>
+        </div>
+
+      </div>
+
+      <div class="cards">
+        <div class="card" onclick="abrirChamado('rede')">
+          <i class="fas fa-network-wired"></i>
+          <h3>Rede</h3>
+          <p>Conexão, internet ou servidores.</p>
+        <a href="./form_chamado.html">ir</a>
+        </div>
+        <div class="card" onclick="abrirChamado('hardware')">
+          <i class="fas fa-cogs"></i>
+          <h3>Hardware</h3>
+          <p>Impressoras, cabos, etc.</p>
+        </div>
+        <div class="card" onclick="abrirChamado('software')">
+          <i class="fas fa-desktop"></i>
+          <h3>Software</h3>
+          <p>Programas e sistemas.</p>
+        </div>
+        <div class="card" onclick="abrirChamado('outros')">
+          <i class="fas fa-question"></i>
+          <h3>Outros</h3>
+          <p>Solicitações diversas.</p>
+        </div>
+        <div class="card" onclick="abrirChamado('impressora')">
+          <i class="fas fa-print"></i>
+          <h3>Impressora</h3>
+          <p>Falhas, tinta, conexão.</p>
+        </div>
+        <div class="card" onclick="abrirChamado('monitor')">
+          <i class="fas fa-tv"></i>
+          <h3>Monitor</h3>
+          <p>Resolução ou tela apagada.</p>
+        </div>
+        <div class="card" onclick="abrirChamado('teclado')">
+          <i class="fas fa-keyboard"></i>
+          <h3>Teclado</h3>
+          <p>Teclas ou layout.</p>
+        </div>
+        <div class="card" onclick="abrirChamado('notebook')">
+          <i class="fas fa-laptop"></i>
+          <h3>Notebook</h3>
+          <p>Bateria ou desempenho.</p>
+          <button></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

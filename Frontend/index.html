@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>COMERCIAL PRIME - Suporte Técnico</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+    /* Reset e base */
+    html {
+    scroll-behavior: smooth;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #000102 0%, #0c0e1a 100%);
+      color: #d1d5db;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+    }
+
+    a {
+      color: #60a5fa;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    a:hover, a:focus {
+      color: #3b82f6;
+      outline: none;
+    }
+
+    header.header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: rgba(1, 10, 32, 0.9);
+      border-bottom: 1px solid #334155;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      user-select: none;
+    }
+
+    nav.nav a {
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0 1rem;
+      color: #cbd5e1;
+      position: relative;
+    }
+    nav.nav a:hover,
+    nav.nav a:focus {
+      color: #3b82f6;
+    }
+
+    .header-btn {
+      background: #3b82f6;
+      border: none;
+      border-radius: 6px;
+      padding: 0.5rem 1.25rem;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 6px 10px rgba(59, 130, 246, 0.6);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+    .header-btn:hover,
+    .header-btn:focus {
+      background: #2563eb;
+      box-shadow: 0 8px 15px rgba(37, 99, 235, 0.7);
+      outline: none;
+    }
+
+    section.hero {
+      text-align: center;
+      padding: 5rem 1rem 4rem;
+      color: #e0e7ff;
+    }
+
+    section.hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: #f8fafc;
+      line-height: 1.2;
+    }
+
+    section.hero p {
+      font-size: 1.25rem;
+      margin-bottom: 2.5rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    .hero-btn {
+      background: #001136;
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 2rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 8px 15px rgba(22, 38, 71, 0.6);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+    .hero-btn:hover,
+    .hero-btn:focus {
+      background: #1e40af;
+      box-shadow: 0 10px 20px rgba(30, 64, 175, 0.8);
+      outline: none;
+    }
+
+    section.mockup {
+      padding: 3rem 1rem 5rem;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    .mockup-container {
+      display: flex;
+      gap: 3rem;
+      max-width: 900px;
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .desktop-img,
+    .phone-img {
+      max-width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
+      transition: transform 0.3s ease;
+      user-select: none;
+    }
+    .desktop-img:hover,
+    .phone-img:hover {
+      transform: scale(1.05);
+    }
+
+    section > h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      user-select: none;
+    }
+
+    .slider {
+      overflow-x: hidden;
+      padding: 0 1rem 3rem;
+      background: linear-gradient(135deg, #000102 );
+      border-radius: 12px;
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+    }
+
+    .slider-items {
+      display: flex;
+      gap: 2rem;
+      animation: scrollSlider 30s linear infinite;
+    }
+
+    @keyframes scrollSlider {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .slider-items img {
+      height: 60px;
+      user-select: none;
+      filter: grayscale(80%);
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+    .slider-items img:hover,
+    .slider-items img:focus {
+      filter: grayscale(10%);
+      transform: scale(1.1);
+      outline: none;
+    }
+
+    section.features {
+      max-width: 1200px;
+      margin: 0 auto 5rem;
+      padding: 0 1rem;
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .feature {
+      background: rgba(0, 7, 24, 0.7);
+
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
+      border-radius: 16px;
+      flex: 1 1 320px;
+      padding: 2rem;
+      color: #cbd5e1;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      transition: box-shadow 0.3s ease;
+      user-select: none;
+    }
+    .feature:hover {
+      box-shadow: 0 10px 25px rgba(59, 130, 246, 0.5);
+    }
+
+    .feature-image img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 4px #2563eb);
+    }
+
+    .feature-text h2 {
+      color: #60a5fa;
+      margin: 0 0 0.5rem 0;
+      font-size: 1.5rem;
+    }
+    .feature-text p {
+      margin: 0;
+      font-size: 1rem;
+      color: #cbd5e1;
+      line-height: 1.4;
+    }
+
+    footer.footer {
+      background: #1e40af;
+      color: #e0e7ff;
+      box-shadow: 0 -2px 10px rgba(30, 64, 175, 0.7);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      user-select: none;
+    }
+
+    footer.footer p {
+      margin: 0 0 0.5rem 0;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+    }
+
+    .social-media {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+    }
+
+    .social-media a img {
+      width: 28px;
+      filter: brightness(1);
+      transition: filter 0.3s ease;
+      user-select: none;
+    }
+    .social-media a:hover img,
+    .social-media a:focus img {
+      filter: brightness(0.7);
+      outline: none;
+    }
+
+    /* Responsividade simples */
+    @media (max-width: 768px) {
+      nav.nav a {
+        padding: 0 0.5rem;
+        font-size: 0.9rem;
+      }
+      section.hero h1 {
+        font-size: 2rem;
+      }
+      section.features {
+        flex-direction: column;
+        padding: 0 1.5rem;
+      }
+      .feature {
+        flex: 1 1 100%;
+      }
+      .mockup-container {
+        flex-direction: column;
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">COMERCIAL PRIME</div>
+    <nav class="nav">
+      <a href="#home">Início</a>
+      <a href="#features">Serviços</a>
+      <a href="../planos/planos.html">Planos</a>
+      <a href="#contact">Contato</a>
+    </nav>
+    <a href="interno/login.cliente.html">
+      <button class="header-btn" type="button">Acesse o Suporte</button>
+    </a>
+  </header>
+
+  <section class="hero" id="home">
+    <h1>Suporte Técnico Ágil e Profissional <br /> para Sua Empresa</h1>
+    <p>Resolva problemas de tecnologia de forma rápida<br /> e eficiente, com nossa equipe especializada.</p>
+    <button class="hero-btn" type="button">Solicitar Suporte</button>
+  </section>
+
+  <section class="mockup" id="mockup">
+    <div class="mockup-container">
+      <img class="desktop-img" src="../imgs/assets_task_01jswtxnwvezqav4ga5n6k66km_1745798282_img_0.webp" alt="Tela de Suporte - Computador" />
+      <img class="phone-img" src="../imgs/5f399e48-339e-4355-9ff7-4df16474fb5b.jpeg" alt="Tela de Suporte - Celular" />
+    </div>
+  </section>
+
+  <section class="partners">
+    <h1>Nossos Parceiros</h1>
+    <div class="slider" aria-label="Parceiros em carrossel">
+      <div class="slider-items" role="list">
+        <img src="imgs/.jpg" alt="TESTANDO" role="listitem" tabindex="0" class="foto" />      
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="feature">
+      <div class="feature-image">
+        <img src="../imgs/mac-os.png" alt="Atendimento Rápido" />
+      </div>
+      <div class="feature-text">
+        <h2>Atendimento Rápido</h2>
+        <p>
+          Receba respostas e soluções rápidas, minimizando o tempo de inatividade e garantindo que sua empresa continue funcionando sem interrupções.
+          Nosso suporte ágil resolve problemas em tempo recorde.
+        </p>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-image">
+        <img src="../imgs/openai-white-lockup.png" alt="Especialistas Qualificados" />
+      </div>
+      <div class="feature-text">
+        <h2>Especialistas Qualificados</h2>
+        <p>
+          Nossa equipe é composta por profissionais altamente treinados e certificados, preparados para lidar com uma ampla variedade de tecnologias e desafios.
+        </p>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-image">
+        <img src="../imgs/github.png" alt="Suporte 24/7" />
+      </div>
+      <div class="feature-text">
+        <h2>Suporte 24/7</h2>
+        <p>
+          Estamos disponíveis a qualquer hora para garantir que seus sistemas estejam sempre operacionais, oferecendo suporte contínuo e monitoramento ativo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 COMERCIAL PRIME. Todos os direitos reservados.</p>
+    <div class="social-media" role="list" aria-label="Redes sociais">
+      <a href="#" role="listitem" tabindex="0"><img src="../imgs/facebook.png" alt="Facebook" /></a>
+      <a href="#" role="listitem" tabindex="0"><img src="../imgs/instagram (1).png" alt="Instagram" /></a>
+      <a href="#" role="listitem" tabindex="0"><img src="../imgs/twitter.png" alt="Twitter" /></a>
+      <a href="#" role="listitem" tabindex="0"><img src="../imgs/linkedin.png" alt="LinkedIn" /></a>
+    </div>
+  </footer>
+</body>
+</html>

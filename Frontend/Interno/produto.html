@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel Administrativo</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+  <link rel="stylesheet" href="../style/interno.css">
+</head>
+<body>
+
+<div class="painel-container">
+
+  <aside class="sidebar">
+    <div class="sidebar__logo">
+      <i class="ti ti-building-store"></i> Meu Painel
+    </div>
+
+    <nav class="sidebar__nav">
+      <span class="sidebar__grupo-label">Menu</span>
+      <a class="sidebar__link sidebar__link--ativo" href="produto.html">
+        <i class="ti ti-box"></i> Produtos
+      </a>
+      <a class="sidebar__link" href="relatorios.html">
+        <i class="ti ti-file-analytics"></i> Relatórios
+      </a>
+      <a class="sidebar__link" href="dashboard.html">
+        <i class="ti ti-chart-pie"></i> Dashboard
+      </a>
+
+      <span class="sidebar__grupo-label">Conta</span>
+      <a class="sidebar__link" href="configuracoes.html">
+        <i class="ti ti-settings"></i> Configurações
+      </a>
+    </nav>
+
+    <div class="sidebar__rodape">
+        <a class="sidebar__link" href="../index.html">
+          <i class="ti ti-logout"></i> Sair
+        </a>
+    </div>
+  </aside>
+
+  <div class="conteudo-principal">
+
+    <header class="topbar">
+        <span class="topbar__titulo" id="nome-pagina-atual">Produtos</span>
+
+        <!-- <div class="topbar__acoes">
+            <button class="btn btn--perigo">
+              <i class="ti ti-trash"></i> Excluir
+            </button>
+            <button class="btn btn--primario">
+              <i class="ti ti-plus"></i> Novo Produto
+            </button>
+        </div> -->
+    </header>
+
+    <main class="painel-conteudo">
+        
+        <div class="painel-header">
+          <h2 class="painel-header__titulo">Gerenciamento de Estoque</h2>
+          <p class="painel-header__subtitulo">Visualize e edite as informações dos seus produtos cadastrados.</p>
+        </div>
+
+        <div class="container-tabela">
+          <table class="tabela-dados">
+            <thead>
+              <tr>
+                <th class="tabela-dados__id">ID</th>
+                <th>Produto</th>
+                <th>Categoria</th>
+                <th class="alinhamento-direita">Preço Unitário</th>
+              </tr>
+            </thead>
+            <tbody id="corpo-tabela-produtos">
+              <tr>
+                <td colspan="4" style="text-align: center; padding: 24px; color: #777;">
+                  Carregando produtos...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+    </main>
+
+  </div>
+</div>
+
+<script src="../js/produto.js"></script></body>
+</html>

@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "HTML",
+			"path": "../../Downloads/NexusDesk-20250905T120753Z-1-001/NexusDesk/HTML"
+		},
+		{
+			"name": "Projeto-Integrador",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Projeto-Integrador"
+	}
+}
