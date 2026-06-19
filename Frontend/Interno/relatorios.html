@@ -3,9 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Painel Administrativo</title>
+  <title>Painel Administrativo — Novo Registro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
   <link rel="stylesheet" href="../style/interno.css">
+  
+  <style>
+    .formulario-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .campo-cheio {
+      grid-column: 1 / -1;
+    }
+    .input-grupo {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .input-grupo label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--clr-ink);
+    }
+    .input-grupo input, .input-grupo select, .input-grupo textarea {
+      padding: 10px 12px;
+      border: 1px solid var(--border-ui);
+      border-radius: 6px;
+      background: #ffffff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--clr-ink);
+      transition: border-color 0.15s ease;
+      width: 100%;
+    }
+    .input-grupo input:focus, .input-grupo select:focus, .input-grupo textarea:focus {
+      outline: none;
+      border-color: var(--clr-steel);
+    }
+  </style>
 </head>
 <body>
 
@@ -15,49 +58,108 @@
     <div class="sidebar__logo">
       <i class="ti ti-building-store"></i> Meu Painel
     </div>
-
-    <nav class="sidebar__nav">
+    <nav class="sidebar__nav" aria-label="Navegação do Painel">
       <span class="sidebar__grupo-label">Menu</span>
-      <a class="sidebar__link" href="produto.html">
-        <i class="ti ti-box"></i> Produtos
-      </a>
-      <a class="sidebar__link sidebar__link--ativo" href="relatorios.html">
-        <i class="ti ti-file-analytics"></i> Relatórios
-      </a>
-      <a class="sidebar__link" href="dashboard.html">
-        <i class="ti ti-chart-pie"></i> Dashboard
-      </a>
-
+      <a class="sidebar__link" href="produto.html"><i class="ti ti-box"></i> Produtos</a>
+      <a class="sidebar__link sidebar__link--ativo" href="relatorios.html"><i class="ti ti-file-analytics"></i> Relatórios</a>
+      <a class="sidebar__link" href="dashboard.html"><i class="ti ti-chart-pie"></i> Dashboard</a>
+      
       <span class="sidebar__grupo-label">Conta</span>
-      <a class="sidebar__link" href="configuracoes.html">
-        <i class="ti ti-settings"></i> Configurações
-      </a>
+      <a class="sidebar__link" href="configuracoes.html"><i class="ti ti-settings"></i> Configurações</a>
     </nav>
-
     <div class="sidebar__rodape">
-        <a class="sidebar__link" href="../index.html">
-          <i class="ti ti-logout"></i> Sair
-        </a>
+      <a class="sidebar__link" href="../index.html"><i class="ti ti-logout"></i> Sair</a>
     </div>
   </aside>
 
   <div class="conteudo-principal">
-
     <header class="topbar">
-        <span class="topbar__titulo" id="nome-pagina-atual">Produtos</span>
+      <span class="topbar__titulo" id="nome-pagina-atual">Novo Registro</span>
     </header>
 
     <main class="painel-conteudo">
-        
-        <div class="painel-header">
-          <h2 class="painel-header__titulo">Gerenciamento de Estoque</h2>
-          <p class="painel-header__subtitulo">Visualize e edite as informações dos seus produtos cadastrados.</p>
+      
+      <div class="painel-header">
+        <h2 class="painel-header__titulo">Inserir Novo Pedido</h2>
+        <p class="painel-header__subtitulo">Preencha as informações abaixo para registrar uma nova venda no sistema comercial.</p>
+      </div>
+
+      <div class="container-tabela" style="padding: 32px; background: #ffffff;">
+        <form id="form-novo-registro">
+          
+        <div class="formulario-grid">
+          
+          <div class="input-grupo">
+            <label for="data_pedido">Data do Pedido</label>
+            <input type="date" id="data_pedido" required />
+          </div>
+
+          <!-- CLIENTE: Continua select, mas a duplicidade será tratada no JS -->
+          <div class="input-grupo">
+            <label for="fk_id_cliente">Cliente</label>
+            <select id="fk_id_cliente" required>
+              <option value="">Selecione o Cliente</option>
+            </select>
+          </div>
+
+          <!-- VENDEDOR: Agora você pode escrever ou selecionar da lista -->
+          <div class="input-grupo">
+            <label for="vendedor">Vendedor</label>
+            <input type="text" id="vendedor" list="lista-vendedores" placeholder="Digite ou selecione o vendedor" required />
+            <datalist id="lista-vendedores"></datalist>
+          </div>
+
+          <!-- PRODUTO: Agora você pode escrever ou selecionar da lista -->
+          <div class="input-grupo">
+            <label for="produto">Produto</label>
+            <input type="text" id="produto" list="lista-produtos" placeholder="Digite ou selecione o produto" required />
+            <datalist id="lista-produtos"></datalist>
+          </div>
+
+          <div class="input-grupo">
+            <label for="quantidade">Quantidade</label>
+            <input type="number" id="quantidade" min="1" placeholder="Ex: 5" required />
+          </div>
+
+          <div class="input-grupo">
+            <label for="fk_id_tipo_pagamento">Forma de Pagamento</label>
+            <select id="fk_id_tipo_pagamento" required>
+              <option value="">Selecione o Pagamento</option>
+            </select>
+          </div>
+
+          <div class="input-grupo">
+            <label for="nota_satisfacao">Nota de Satisfação (0 a 10)</label>
+            <input type="number" id="nota_satisfacao" min="0" max="10" placeholder="Ex: 9" required />
+          </div>
+
+          <div class="input-grupo campo-cheio">
+            <label for="observacao">Observações do Registro</label>
+            <textarea id="observacao" rows="3" placeholder="Insira observações adicionais sobre o pedido... (Máx. 100 caracteres)" maxlength="100"></textarea>
+          </div>
+
         </div>
 
-        </main>
+          </div>
 
+          <div style="margin-top: 32px; display: flex; gap: 12px; justify-content: flex-end; border-top: 1px solid var(--border-ui); padding-top: 24px;">
+            <button class="btn btn--perigo" type="reset">Limpar Campos</button>
+            <button class="btn btn--primario" type="submit">Salvar Pedido</button>
+          </div>
+
+        </form>
+      </div>
+
+    </main>
   </div>
 </div>
 
+<script src="../js/registro.js"></script>
 </body>
 </html>
+
+
+
+Corrija o cliente ta repetindo, eu quero que mostre apenas 1 de cada
+Eu quero inserir o nome do vendedor
+quero escrever o nome do produto, 

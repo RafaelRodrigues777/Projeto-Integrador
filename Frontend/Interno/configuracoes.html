@@ -5,7 +5,253 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Painel Administrativo</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
-    <link rel="stylesheet" href="../style/interno.css">
+    <style>
+/* ==========================================================================
+   SISTEMA DE DESIGN — PAINEL ADMINISTRATIVO (MINIMALISTA)
+   ========================================================================== */
+
+:root {
+  /* --- SUA PALETA DE CORES OFICIAL --- */
+  --clr-stone:      #d4cdc5; /* Bordas suaves, divisores e linhas de tabela */
+  --clr-steel:      #5b88a5; /* Elementos de destaque médio, hover e ícones ativos */
+  --clr-offwhite:   #f4f4f2; /* Fundo principal das telas e áreas de conteúdo */
+  --clr-ink:        #191013; /* Texto principal e elementos de alto contraste */
+  --clr-navy:       #243a69; /* Azul Profundo: Fundo da sidebar, botões primários */
+
+  /* --- MAPEAMENTO SEMÂNTICO CRISTALINO --- */
+  --bg-app:         var(--clr-offwhite);
+  --bg-sidebar:     var(--clr-navy);
+  --bg-card:        #ffffff;
+  
+  --text-main:      var(--clr-ink);
+  --text-muted:     #606870;
+  --text-light:     var(--clr-offwhite);
+  
+  --border-ui:      rgba(212, 205, 197, 0.6); /* clr-stone suavizado */
+
+  /* --- TIPOGRAFIA E INTERFACE --- */
+  --font-sans:      'Inter', system-ui, -apple-system, sans-serif;
+  --radius-md:      6px;
+  --radius-lg:      10px;
+  --transition:     0.2s ease-in-out;
+}
+
+/* ==========================================================================
+   RESET & REGRAS BASE
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ==========================================================================
+   LAYOUT GRID E ESTRUTURA PRINCIPAL
+   ========================================================================== */
+.painel-container {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+/* --- SIDEBAR LATERAL --- */
+.sidebar {
+  background-color: var(--bg-sidebar);
+  color: var(--text-light);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.25rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sidebar__logo {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(212, 205, 197, 0.1);
+  color: #ffffff;
+}
+
+.sidebar__logo i {
+  font-size: 1.4rem;
+  color: var(--clr-steel);
+}
+
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 1.5rem;
+  flex: 1;
+}
+
+.sidebar__grupo-label {
+  font-size: 0.725rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(212, 205, 197, 0.4);
+  margin: 1rem 0 0.25rem 0.75rem;
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--clr-stone);
+  border-radius: var(--radius-md);
+  transition: all var(--transition);
+}
+
+.sidebar__link i {
+  font-size: 1.2rem;
+  transition: transform var(--transition);
+}
+
+.sidebar__link:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.sidebar__link:hover i {
+  transform: translateX(2px);
+}
+
+.sidebar__link--ativo {
+  background-color: var(--clr-steel);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.sidebar__link--ativo:hover {
+  background-color: var(--clr-steel);
+}
+
+.sidebar__rodape {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(212, 205, 197, 0.1);
+}
+
+/* --- ÁREA DE CONTEÚDO --- */
+.conteudo-principal {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+/* Topbar Superior Fina */
+.topbar {
+  background-color: #ffffff;
+  height: 64px;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  border-bottom: 1px solid var(--border-ui);
+}
+
+.topbar__titulo {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--clr-navy);
+}
+
+.topbar__acoes {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Área Interna de Trabalho */
+.painel-conteudo {
+  padding: 2rem;
+  flex: 1;
+}
+
+.painel-header {
+  margin-bottom: 2rem;
+}
+
+.painel-header__titulo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--clr-navy);
+  letter-spacing: -0.02em;
+}
+
+.painel-header__subtitulo {
+  font-size: 0.925rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+/* ==========================================================================
+   COMPONENTES CORE (BOTÕES & INTERFACES FUTURAS)
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.15rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.btn--primario {
+  background-color: var(--clr-navy);
+  color: #ffffff;
+}
+.btn--primario:hover {
+  background-color: var(--clr-steel);
+}
+
+.btn--perigo {
+  background-color: transparent;
+  border-color: #e0b6b6;
+  color: #a64444;
+}
+.btn--perigo:hover {
+  background-color: #fdf5f5;
+  border-color: #a64444;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE SUBTIL
+   ========================================================================== */
+@media (max-width: 768px) {
+  .painel-container {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    display: none; /* Em sistemas complexos móveis, aplicar-se-ia um menu hambúrguer */
+  }
+}    </style>
 </head>
 <body>
 
@@ -22,7 +268,7 @@
         <i class="ti ti-box"></i> Produtos
       </a>
       <a class="sidebar__link" href="relatorios.html">
-        <i class="ti ti-file-analytics"></i> Relatórios
+        <i class="ti ti-file-analytics"></i> Novo registro
       </a>
       <a class="sidebar__link" href="dashboard.html">
         <i class="ti ti-chart-pie"></i> Dashboard

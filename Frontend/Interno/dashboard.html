@@ -13,7 +13,7 @@
 
   <aside class="sidebar">
     <div class="sidebar__logo">
-      <i class=""></i> Meu Painel
+      <i class="ti ti-building-store"></i> Meu Painel
     </div>
     <nav class="sidebar__nav">
       <span class="sidebar__grupo-label">Menu</span>
@@ -37,24 +37,28 @@
 
       <div class="cards-container">
         <div class="card-dashboard">
+          <div class="card-icone"><i class="ti ti-currency-real"></i></div>
           <div class="card-faturamento">
             <span class="card-titulo">Faturamento</span>
             <h2 id="card-faturamento">--</h2>
           </div>
         </div>
         <div class="card-dashboard">
+          <div class="card-icone"><i class="ti ti-shopping-cart"></i></div>
           <div class="card-pedidos">
             <span class="card-titulo">Pedidos</span>
             <h2 id="card-pedidos">--</h2>
           </div>
         </div>
         <div class="card-dashboard">
+          <div class="card-icone"><i class="ti ti-users"></i></div>
           <div class="card-clientes">
             <span class="card-titulo">Clientes</span>
             <h2 id="card-clientes">--</h2>
           </div>
         </div>
         <div class="card-dashboard">
+          <div class="card-icone"><i class="ti ti-package"></i></div>
           <div class="card-produtos">
             <span class="card-titulo">Produtos</span>
             <h2 id="card-produtos">--</h2>
@@ -62,39 +66,54 @@
         </div>
       </div>
 
-      <div style="gap:20px;">
+      <div style="display: flex; flex-direction: column; gap: 20px;">
 
-        <details class="painel-header" style="width:100%;" open>
-          <summary>Quais produtos mais vendem?</summary>
-          <div style="width:100%; height:300px;">
+        <details class="card-dashboard" style="display: block; width: 100%;" open>
+          <summary class="card-titulo" style="font-size: 15px; font-weight: 600; color: var(--clr-ink); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+            Quais produtos mais vendem?
+            <i class="ti ti-chevron-down" style="font-size: 1.1rem; color: var(--text-muted);"></i>
+          </summary>
+          <div style="width:100%; height:300px; margin-top: 20px;" onclick="event.stopPropagation();">
             <canvas id="PrimeiroGrafico"></canvas>
           </div>
         </details>
 
-        <details class="painel-header" style="width:100%;" open>
-          <summary>Quais vendedores geram mais receita?</summary>
-          <div style="width:100%; height:300px;">
+        <details class="card-dashboard" style="display: block; width: 100%;" open>
+          <summary class="card-titulo" style="font-size: 15px; font-weight: 600; color: var(--clr-ink); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+            Quais vendedores geram mais receita?
+            <i class="ti ti-chevron-down" style="font-size: 1.1rem; color: var(--text-muted);"></i>
+          </summary>
+          <div style="width:100%; height:300px; margin-top: 20px;" onclick="event.stopPropagation();">
             <canvas id="SegundoGrafico"></canvas>
           </div>
         </details>
 
-        <details class="painel-header" style="width:100%;" open>
-          <summary>Quais regiões apresentam melhor desempenho?</summary>
-          <div style="width:100%; height:300px;">
+        <details class="card-dashboard" style="display: block; width: 100%;" open>
+          <summary class="card-titulo" style="font-size: 15px; font-weight: 600; color: var(--clr-ink); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+            Quais regiões apresentam melhor desempenho?
+            <i class="ti ti-chevron-down" style="font-size: 1.1rem; color: var(--text-muted);"></i>
+          </summary>
+          <div style="width:100%; height:300px; margin-top: 20px;" onclick="event.stopPropagation();">
             <canvas id="TerceiroGrafico"></canvas>
           </div>
         </details>
 
-        <details class="painel-header" style="width:100%;" open>
-          <summary>Existe relação entre faturamento e satisfação?</summary>
-          <div style="width:100%; height:300px;">
+        <details class="card-dashboard" style="display: block; width: 100%;" open>
+          <summary class="card-titulo" style="font-size: 15px; font-weight: 600; color: var(--clr-ink); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+            Existe relação entre faturamento e satisfação?
+            <i class="ti ti-chevron-down" style="font-size: 1.1rem; color: var(--text-muted);"></i>
+          </summary>
+          <div style="width:100%; height:300px; margin-top: 20px;" onclick="event.stopPropagation();">
             <canvas id="QuartoGrafico"></canvas>
           </div>
         </details>
 
-        <details class="painel-header" style="width:100%;" open>
-          <summary>Quinto Gráfico</summary>
-          <div style="width:100%; height:300px;">
+        <details class="card-dashboard" style="display: block; width: 100%;" open>
+          <summary class="card-titulo" style="font-size: 15px; font-weight: 600; color: var(--clr-ink); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+            Rafael é incapaz de pensar em outro grafico
+            <i class="ti ti-chevron-down" style="font-size: 1.1rem; color: var(--text-muted);"></i>
+          </summary>
+          <div style="width:100%; height:300px; margin-top: 20px;" onclick="event.stopPropagation();">
             <canvas id="QuintoGrafico"></canvas>
           </div>
         </details>
@@ -105,7 +124,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="js/dashboard.js"></script>
+<script src="../js/dashboard.js"></script>
 
 </body>
 </html>
