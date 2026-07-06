@@ -1,0 +1,232 @@
+-- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: comercial
+-- ------------------------------------------------------
+-- Server version	9.6.0
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
+SET @@SESSION.SQL_LOG_BIN= 0;
+
+--
+-- GTID state at the beginning of the backup 
+--
+
+SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '6a0eed87-34d8-11f1-8b11-24b2b93ade98:1-411,
+9ba68dd7-34d6-11f1-8bf0-0ccc47e9ed86:1-946';
+
+--
+-- Table structure for table `categoria`
+--
+
+DROP TABLE IF EXISTS `categoria`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `categoria` (
+  `id_categoria` int NOT NULL AUTO_INCREMENT,
+  `nome_categoria` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_categoria`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categoria`
+--
+
+LOCK TABLES `categoria` WRITE;
+/*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
+INSERT INTO `categoria` VALUES (1,'Ferramentas');
+/*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cliente`
+--
+
+DROP TABLE IF EXISTS `cliente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cliente` (
+  `id_cliente` int NOT NULL AUTO_INCREMENT,
+  `nome_cliente` varchar(50) NOT NULL,
+  `fk_id_localizacao` int NOT NULL,
+  PRIMARY KEY (`id_cliente`),
+  KEY `fk_id_localizacao` (`fk_id_localizacao`),
+  CONSTRAINT `fk_id_localizacao` FOREIGN KEY (`fk_id_localizacao`) REFERENCES `localizacao` (`id_localizacao`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cliente`
+--
+
+LOCK TABLES `cliente` WRITE;
+/*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+INSERT INTO `cliente` VALUES (1,'Auto Center Prime',1),(2,'Auto Center Prime',1),(3,'Auto Center Prime',1),(4,'Auto Center Prime',1),(5,'Auto Center Prime',1),(6,'Auto Center Prime',1),(7,'Cliente XPTO',1),(8,'Cliente XPTO',2),(9,'Cliente XPTO',2),(10,'Cliente XPTO',2),(11,'Cliente XPTO',2),(12,'Cliente XPTO',2),(13,'Construtora PR',2),(14,'Construtora PR',2),(15,'Construtora PR',3),(16,'Construtora PR',3),(17,'Construtora PR',3),(18,'Construtora PR',3),(19,'Indústria Alpha',3),(20,'Indústria Alpha',3),(21,'Indústria Alpha',3),(22,'Indústria Alpha',4),(23,'Indústria Alpha',4),(24,'Indústria Alpha',4),(25,'Loja Ferramentas BR',4),(26,'Loja Ferramentas BR',4),(27,'Loja Ferramentas BR',4),(28,'Loja Ferramentas BR',4),(29,'Loja Ferramentas BR',5),(30,'Loja Ferramentas BR',5),(31,'Mercado Industrial',5),(32,'Mercado Industrial',5),(33,'Mercado Industrial',5),(34,'Mercado Industrial',5),(35,'Mercado Industrial',5),(36,'Mercado Industrial',6),(37,'Metalúrgica Sul',6),(38,'Metalúrgica Sul',6),(39,'Metalúrgica Sul',6),(40,'Metalúrgica Sul',6),(41,'Metalúrgica Sul',6),(42,'Metalúrgica Sul',6),(43,'Oficina Curitiba',7),(44,'Oficina Curitiba',7),(45,'Oficina Curitiba',7),(46,'Oficina Curitiba',7),(47,'Oficina Curitiba',7),(48,'Oficina Curitiba',7),(49,'Tech Solutions',7),(50,'Alpha Sistemas',8),(51,'Rio Digital',8),(52,'Niteroi Tech',8),(53,'Minas Software',8),(54,'Triangulo TI',8),(55,'Curitiba Sistemas',8),(56,'Paraná Tecnologia',8),(57,'Floripa Cloud',9),(58,'Join Tech',9),(59,'Sul Informática',9),(60,'Serra Sistemas',9),(61,'Bahia Solutions',9),(62,'Nordeste TI',9),(63,'Recife Cloud',9),(64,'Fortal Sistemas',10),(65,'Goias Digital',10),(66,'Capital Tech',10),(67,'Amazon Data',10),(68,'Para Tecnologia',10),(69,'Alpha Tech SP',10),(70,'Beta Digital SP',10),(71,'Rio Cloud RJ',11),(72,'Niteroi Systems RJ',11),(73,'Minas TI MG',11),(74,'UberTech MG',11),(75,'Curitiba Soft PR',11),(76,'Paraná Dev PR',11),(77,'Floripa Cloud SC',12),(78,'Joinville Systems SC',12),(79,'Sul Code RS',12),(80,'Serra TI RS',12),(81,'Bahia Digital BA',12),(82,'Nordeste Cloud BA',12),(83,'Recife Systems PE',13),(84,'Fortaleza Dev CE',13),(85,'Goias Tech GO',13),(86,'Brasilia Data DF',13),(87,'Amazon Tech AM',13),(88,'Para Systems PA',13);
+/*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `localizacao`
+--
+
+DROP TABLE IF EXISTS `localizacao`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `localizacao` (
+  `id_localizacao` int NOT NULL AUTO_INCREMENT,
+  `cidade` varchar(50) NOT NULL,
+  `estado` varchar(2) NOT NULL,
+  PRIMARY KEY (`id_localizacao`)
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `localizacao`
+--
+
+LOCK TABLES `localizacao` WRITE;
+/*!40000 ALTER TABLE `localizacao` DISABLE KEYS */;
+INSERT INTO `localizacao` VALUES (1,'Araucária','PR'),(2,'Cascavel','PR'),(3,'Curitiba','PR'),(4,'Londrina','PR'),(5,'Maringá','PR'),(6,'Ponta Grossa','PR'),(7,'São Paulo','SP'),(8,'São Paulo','SP'),(9,'Campinas','SP'),(10,'Rio de Janeiro','RJ'),(11,'Niterói','RJ'),(12,'Belo Horizonte','MG'),(13,'Uberlândia','MG'),(14,'Curitiba','PR'),(15,'Londrina','PR'),(16,'Florianópolis','SC'),(17,'Joinville','SC'),(18,'Porto Alegre','RS'),(19,'Caxias do Sul','RS'),(20,'Salvador','BA'),(21,'Feira de Santana','BA'),(22,'Recife','PE'),(23,'Fortaleza','CE'),(24,'Goiânia','GO'),(25,'Brasília','DF'),(26,'Manaus','AM'),(27,'Belém','PA'),(28,'São Paulo','SP'),(29,'Santos','SP'),(30,'Rio de Janeiro','RJ'),(31,'Niterói','RJ'),(32,'Belo Horizonte','MG'),(33,'Uberlândia','MG'),(34,'Curitiba','PR'),(35,'Londrina','PR'),(36,'Florianópolis','SC'),(37,'Joinville','SC'),(38,'Porto Alegre','RS'),(39,'Caxias do Sul','RS'),(40,'Salvador','BA'),(41,'Feira de Santana','BA'),(42,'Recife','PE'),(43,'Fortaleza','CE'),(44,'Goiânia','GO'),(45,'Brasília','DF'),(46,'Manaus','AM'),(47,'Belém','PA');
+/*!40000 ALTER TABLE `localizacao` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `produto`
+--
+
+DROP TABLE IF EXISTS `produto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `produto` (
+  `id_produto` int NOT NULL AUTO_INCREMENT,
+  `nome_produto` varchar(50) NOT NULL,
+  `valor_unitario` decimal(10,2) NOT NULL,
+  `fk_id_categoria` int NOT NULL,
+  PRIMARY KEY (`id_produto`),
+  KEY `fk_id_categoria` (`fk_id_categoria`),
+  CONSTRAINT `fk_id_categoria` FOREIGN KEY (`fk_id_categoria`) REFERENCES `categoria` (`id_categoria`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `produto`
+--
+
+LOCK TABLES `produto` WRITE;
+/*!40000 ALTER TABLE `produto` DISABLE KEYS */;
+INSERT INTO `produto` VALUES (1,'Furadeira',2619.25,1),(2,'Parafusadeira',2456.85,1),(3,'Soldadora',2570.34,1),(4,'Notebook Lenovo IdeaPad',3299.90,1);
+/*!40000 ALTER TABLE `produto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `registro`
+--
+
+DROP TABLE IF EXISTS `registro`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `registro` (
+  `id_registro` int NOT NULL AUTO_INCREMENT,
+  `data_pedido` date NOT NULL,
+  `numero_pedido` varchar(15) NOT NULL,
+  `fk_id_cliente` int NOT NULL,
+  `fk_id_vendedor` int NOT NULL,
+  `fk_id_produto` int NOT NULL,
+  `quantidade` int NOT NULL,
+  `valor_total` decimal(10,2) NOT NULL,
+  `nota_satisfacao` int NOT NULL,
+  `comentario_satisfacao` varchar(25) DEFAULT NULL,
+  `fk_id_tipo_pagamento` int NOT NULL,
+  `observacao` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id_registro`),
+  KEY `fk_id_cliente` (`fk_id_cliente`),
+  KEY `fk_id_vendedor` (`fk_id_vendedor`),
+  KEY `fk_id_produto` (`fk_id_produto`),
+  KEY `fk_id_tipo_pagamento` (`fk_id_tipo_pagamento`),
+  CONSTRAINT `fk_id_cliente` FOREIGN KEY (`fk_id_cliente`) REFERENCES `cliente` (`id_cliente`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_id_produto` FOREIGN KEY (`fk_id_produto`) REFERENCES `produto` (`id_produto`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_id_tipo_pagamento` FOREIGN KEY (`fk_id_tipo_pagamento`) REFERENCES `tipo_pagamento` (`id_tipo_pagamento`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_id_vendedor` FOREIGN KEY (`fk_id_vendedor`) REFERENCES `vendedor` (`id_vendedor`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `chk_nota` CHECK ((`nota_satisfacao` between 0 and 10))
+) ENGINE=InnoDB AUTO_INCREMENT=384 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `registro`
+--
+
+LOCK TABLES `registro` WRITE;
+/*!40000 ALTER TABLE `registro` DISABLE KEYS */;
+INSERT INTO `registro` VALUES (1,'2025-02-28','PED-001',14,1,3,9,23133.06,10,'Muito Satisfeito',1,NULL),(2,'2025-01-30','PED-002',11,1,2,28,68791.80,10,'Muito Satisfeito',2,NULL),(3,'2025-05-09','PED-003',7,1,3,12,30844.08,10,'Muito Satisfeito',1,NULL),(4,'2025-05-21','PED-004',18,1,2,9,22111.65,0,'Muito Insatisfeito',3,NULL),(5,'2025-03-23','PED-005',17,1,2,4,9827.40,10,'Muito Satisfeito',1,NULL),(6,'2025-06-28','PED-006',14,1,2,21,51593.85,6,'Muito Satisfeito',3,NULL),(7,'2025-05-19','PED-007',11,1,1,29,75958.25,10,'Muito Satisfeito',1,NULL),(8,'2025-03-13','PED-008',16,1,2,6,14741.10,6,'Muito Satisfeito',3,NULL),(9,'2025-02-12','PED-009',7,1,3,4,10281.36,0,'Muito Insatisfeito',2,NULL),(10,'2025-06-19','PED-010',13,1,2,2,4913.70,6,'Muito Satisfeito',3,NULL),(11,'2025-01-16','PED-011',9,1,1,3,7857.75,10,'Muito Satisfeito',3,NULL),(12,'2025-05-25','PED-012',14,1,2,16,39309.60,0,'Muito Insatisfeito',1,NULL),(13,'2025-03-11','PED-013',14,1,1,10,26192.50,10,'Muito Satisfeito',2,NULL),(14,'2025-05-09','PED-014',14,1,2,12,29482.20,6,'Muito Satisfeito',1,NULL),(15,'2025-05-12','PED-015',16,1,2,10,24568.50,0,'Muito Insatisfeito',3,NULL),(16,'2025-03-31','PED-016',14,1,2,15,36852.75,0,'Muito Insatisfeito',1,NULL),(17,'2025-03-25','PED-017',18,1,3,12,30844.08,10,'Muito Satisfeito',1,NULL),(18,'2025-01-18','PED-018',7,1,2,22,54050.70,10,'Muito Satisfeito',3,NULL),(19,'2025-02-21','PED-019',15,1,3,1,2570.34,10,'Muito Satisfeito',1,NULL),(20,'2025-01-30','PED-020',14,1,1,13,34050.25,10,'Muito Satisfeito',3,NULL),(21,'2025-02-08','PED-021',12,1,3,28,71969.52,0,'Muito Insatisfeito',2,NULL),(22,'2025-06-24','PED-022',15,1,2,21,51593.85,0,'Muito Insatisfeito',2,NULL),(23,'2025-03-19','PED-023',16,1,3,17,43695.78,10,'Muito Satisfeito',3,NULL),(24,'2025-01-17','PED-024',7,1,1,15,39288.75,0,'Muito Insatisfeito',3,NULL),(25,'2025-02-28','PED-025',18,1,2,21,51593.85,6,'Muito Satisfeito',3,NULL),(26,'2025-05-31','PED-026',7,1,2,5,12284.25,6,'Muito Satisfeito',2,NULL),(27,'2025-06-28','PED-027',13,1,1,22,57623.50,6,'Muito Satisfeito',3,NULL),(28,'2025-06-29','PED-028',13,1,2,5,12284.25,10,'Muito Satisfeito',2,NULL),(29,'2025-01-19','PED-029',14,1,1,25,65481.25,6,'Muito Satisfeito',2,NULL),(30,'2025-03-15','PED-030',14,1,1,1,2619.25,10,'Muito Satisfeito',1,NULL),(31,'2025-04-18','PED-031',18,1,1,19,49765.75,6,'Muito Satisfeito',3,NULL),(32,'2025-04-11','PED-032',30,1,2,16,39309.60,0,'Muito Insatisfeito',1,NULL),(33,'2025-02-04','PED-033',43,1,3,15,38555.10,0,'Muito Insatisfeito',1,NULL),(34,'2025-02-21','PED-034',7,1,3,12,30844.08,10,'Muito Satisfeito',3,NULL),(35,'2025-03-05','PED-035',20,1,2,8,19654.80,0,'Muito Insatisfeito',3,NULL),(36,'2025-04-17','PED-036',1,1,3,27,69399.18,10,'Muito Satisfeito',3,NULL),(37,'2025-04-17','PED-037',9,1,3,28,71969.52,6,'Muito Satisfeito',3,NULL),(38,'2025-01-30','PED-038',31,1,2,14,34395.90,10,'Muito Satisfeito',2,NULL),(39,'2025-06-21','PED-039',31,1,1,24,62862.00,0,'Muito Insatisfeito',3,NULL),(40,'2025-03-29','PED-040',37,1,2,28,68791.80,6,'Muito Satisfeito',1,NULL),(41,'2025-05-10','PED-041',36,1,2,20,49137.00,10,'Muito Satisfeito',1,NULL),(42,'2025-05-15','PED-042',1,1,2,20,49137.00,10,'Muito Satisfeito',3,NULL),(43,'2025-02-18','PED-043',41,1,3,20,51406.80,0,'Muito Insatisfeito',3,NULL),(44,'2025-04-20','PED-044',37,1,3,3,7711.02,10,'Muito Satisfeito',1,NULL),(45,'2025-04-13','PED-045',33,1,2,15,36852.75,6,'Muito Satisfeito',1,NULL),(46,'2025-04-08','PED-046',12,1,3,3,7711.02,0,'Muito Insatisfeito',3,NULL),(47,'2025-03-03','PED-047',34,1,1,6,15715.50,6,'Muito Satisfeito',3,NULL),(48,'2025-06-11','PED-048',38,1,3,7,17992.38,6,'Muito Satisfeito',1,NULL),(49,'2025-02-22','PED-049',33,1,1,21,55004.25,10,'Muito Satisfeito',1,NULL),(50,'2025-06-15','PED-050',26,1,2,17,41766.45,10,'Muito Satisfeito',2,NULL),(51,'2025-04-21','PED-051',14,1,3,10,25703.40,0,'Muito Insatisfeito',1,NULL),(52,'2025-05-08','PED-052',44,1,2,26,63878.10,0,'Muito Insatisfeito',3,NULL),(53,'2025-04-12','PED-053',1,1,1,24,62862.00,10,'Muito Satisfeito',3,NULL),(54,'2025-02-20','PED-054',42,1,1,29,75958.25,10,'Muito Satisfeito',3,NULL),(55,'2025-06-06','PED-055',26,1,2,20,49137.00,0,'Muito Insatisfeito',2,NULL),(56,'2025-05-19','PED-056',34,1,3,17,43695.78,0,'Muito Insatisfeito',2,NULL),(57,'2025-02-21','PED-057',43,1,1,20,52385.00,0,'Muito Insatisfeito',1,NULL),(58,'2025-02-24','PED-058',23,1,3,9,23133.06,0,'Muito Insatisfeito',3,NULL),(59,'2025-02-23','PED-059',46,1,3,18,46266.12,0,'Muito Insatisfeito',2,NULL),(60,'2025-01-24','PED-060',37,1,3,1,2570.34,0,'Muito Insatisfeito',2,NULL),(61,'2025-03-01','PED-061',5,1,3,28,71969.52,6,'Muito Satisfeito',1,NULL),(62,'2025-05-06','PED-062',25,1,2,6,14741.10,6,'Muito Satisfeito',2,NULL),(63,'2025-05-31','PED-063',29,1,3,8,20562.72,10,'Muito Satisfeito',2,NULL),(64,'2025-05-30','PED-064',45,1,1,6,15715.50,6,'Muito Satisfeito',1,NULL),(65,'2025-02-22','PED-065',47,1,3,26,66828.84,6,'Muito Satisfeito',3,NULL),(66,'2025-02-18','PED-066',47,1,1,23,60242.75,0,'Muito Insatisfeito',2,NULL),(67,'2025-04-04','PED-067',35,1,2,27,66334.95,6,'Muito Satisfeito',1,NULL),(68,'2025-05-11','PED-068',39,1,1,12,31431.00,0,'Muito Insatisfeito',2,NULL),(69,'2025-06-23','PED-069',15,1,3,15,38555.10,10,'Muito Satisfeito',2,NULL),(70,'2025-05-17','PED-070',7,1,2,30,73705.50,10,'Muito Satisfeito',1,NULL),(71,'2025-05-09','PED-071',24,1,3,3,7711.02,10,'Muito Satisfeito',1,NULL),(72,'2025-02-20','PED-072',23,1,1,27,70719.75,0,'Muito Insatisfeito',1,NULL),(73,'2025-01-02','PED-073',31,1,2,21,51593.85,10,'Muito Satisfeito',2,NULL),(74,'2025-05-19','PED-074',4,1,2,10,24568.50,10,'Muito Satisfeito',2,NULL),(75,'2025-03-30','PED-075',6,1,1,26,68100.50,10,'Muito Satisfeito',1,NULL),(76,'2025-03-04','PED-076',18,1,1,2,5238.50,0,'Muito Insatisfeito',2,NULL),(77,'2025-01-23','PED-077',10,1,2,6,14741.10,6,'Muito Satisfeito',1,NULL),(78,'2025-04-19','PED-078',43,1,1,22,57623.50,10,'Muito Satisfeito',2,NULL),(79,'2025-01-23','PED-079',11,1,2,12,29482.20,6,'Muito Satisfeito',3,NULL),(80,'2025-02-27','PED-080',20,1,2,27,66334.95,0,'Muito Insatisfeito',1,NULL),(81,'2025-03-02','PED-081',39,1,1,25,65481.25,0,'Muito Insatisfeito',2,NULL),(82,'2025-05-16','PED-082',9,1,2,8,19654.80,0,'Muito Insatisfeito',1,NULL),(83,'2025-05-21','PED-083',19,1,1,3,7857.75,10,'Muito Satisfeito',3,NULL),(84,'2025-01-09','PED-084',1,1,3,9,23133.06,6,'Muito Satisfeito',2,NULL),(85,'2025-01-14','PED-085',39,1,1,26,68100.50,10,'Muito Satisfeito',3,NULL),(86,'2025-04-25','PED-086',43,1,1,10,26192.50,0,'Muito Insatisfeito',2,NULL),(87,'2025-04-01','PED-087',15,1,3,10,25703.40,10,'Muito Satisfeito',1,NULL),(88,'2025-04-01','PED-088',31,1,1,27,70719.75,10,'Muito Satisfeito',1,NULL),(89,'2025-05-03','PED-089',15,1,1,24,62862.00,0,'Muito Insatisfeito',1,NULL),(90,'2025-02-13','PED-090',4,1,3,8,20562.72,10,'Muito Satisfeito',3,NULL),(91,'2025-05-17','PED-091',12,1,3,4,10281.36,0,'Muito Insatisfeito',3,NULL),(92,'2025-02-02','PED-092',15,1,1,16,41908.00,10,'Muito Satisfeito',1,NULL),(93,'2025-04-09','PED-093',34,1,2,22,54050.70,0,'Muito Insatisfeito',1,NULL),(94,'2025-03-25','PED-094',10,1,1,16,41908.00,0,'Muito Insatisfeito',1,NULL),(95,'2025-01-04','PED-095',15,1,1,7,18334.75,0,'Muito Insatisfeito',2,NULL),(96,'2025-01-23','PED-096',4,1,2,6,14741.10,0,'Muito Insatisfeito',1,NULL),(97,'2025-06-06','PED-097',22,1,3,5,12851.70,10,'Muito Satisfeito',1,NULL),(98,'2025-04-24','PED-098',8,1,1,14,36669.50,0,'Muito Insatisfeito',2,NULL),(99,'2025-05-15','PED-099',30,1,1,27,70719.75,6,'Muito Satisfeito',1,NULL),(100,'2025-02-26','PED-100',38,1,2,16,39309.60,6,'Muito Satisfeito',3,NULL),(101,'2025-02-23','PED-101',22,1,2,6,14741.10,6,'Muito Satisfeito',1,NULL),(102,'2025-05-23','PED-102',28,1,3,16,41125.44,6,'Muito Satisfeito',2,NULL),(103,'2025-04-05','PED-103',28,1,2,9,22111.65,0,'Muito Insatisfeito',1,NULL),(104,'2025-03-21','PED-104',4,1,1,15,39288.75,0,'Muito Insatisfeito',2,NULL),(105,'2025-03-02','PED-105',8,1,1,7,18334.75,10,'Muito Satisfeito',2,NULL),(106,'2025-05-29','PED-106',39,1,1,14,36669.50,0,'Muito Insatisfeito',3,NULL),(107,'2025-03-05','PED-107',40,1,2,15,36852.75,6,'Muito Satisfeito',1,NULL),(108,'2025-01-19','PED-108',1,1,2,19,46680.15,0,'Muito Insatisfeito',1,NULL),(109,'2025-03-19','PED-109',1,1,1,21,55004.25,10,'Muito Satisfeito',1,NULL),(110,'2025-04-12','PED-110',44,1,1,1,2619.25,6,'Muito Satisfeito',1,NULL),(111,'2025-06-11','PED-111',11,1,1,4,10477.00,6,'Muito Satisfeito',1,NULL),(112,'2025-06-07','PED-112',2,1,1,14,36669.50,10,'Muito Satisfeito',2,NULL),(113,'2025-06-10','PED-113',28,1,1,27,70719.75,6,'Muito Satisfeito',2,NULL),(114,'2025-02-01','PED-114',30,1,1,14,36669.50,0,'Muito Insatisfeito',1,NULL),(115,'2025-02-09','PED-115',20,1,1,19,49765.75,10,'Muito Satisfeito',2,NULL),(116,'2025-04-30','PED-116',24,1,3,24,61688.16,0,'Muito Insatisfeito',2,NULL),(117,'2025-02-10','PED-117',8,1,3,16,41125.44,10,'Muito Satisfeito',3,NULL),(118,'2025-06-14','PED-118',34,1,1,21,55004.25,10,'Muito Satisfeito',2,NULL),(119,'2025-03-18','PED-119',48,1,1,2,5238.50,6,'Muito Satisfeito',2,NULL),(120,'2025-04-21','PED-120',30,1,3,8,20562.72,6,'Muito Satisfeito',2,NULL),(121,'2025-05-30','PED-121',16,1,1,1,2619.25,6,'Muito Satisfeito',3,NULL),(122,'2025-06-04','PED-122',40,1,1,23,60242.75,6,'Muito Satisfeito',3,NULL),(123,'2025-01-29','PED-123',6,1,3,15,38555.10,0,'Muito Insatisfeito',2,NULL),(124,'2025-01-24','PED-124',11,1,1,12,31431.00,0,'Muito Insatisfeito',3,NULL),(125,'2025-01-10','PED-125',20,1,1,9,23573.25,10,'Muito Satisfeito',3,NULL),(126,'2025-02-28','PED-126',35,1,2,13,31939.05,6,'Muito Satisfeito',3,NULL),(127,'2025-02-15','PED-127',19,1,1,30,78577.50,10,'Muito Satisfeito',1,NULL),(128,'2025-02-07','PED-128',12,1,1,24,62862.00,0,'Muito Insatisfeito',3,NULL),(129,'2025-01-06','PED-129',31,1,3,28,71969.52,6,'Muito Satisfeito',1,NULL),(130,'2025-06-12','PED-130',39,1,1,4,10477.00,6,'Muito Satisfeito',2,NULL),(131,'2025-02-11','PED-131',14,1,1,22,57623.50,0,'Muito Insatisfeito',3,NULL),(132,'2025-02-13','PED-132',38,1,1,20,52385.00,0,'Muito Insatisfeito',2,NULL),(133,'2025-01-16','PED-133',36,1,2,4,9827.40,6,'Muito Satisfeito',1,NULL),(134,'2025-02-15','PED-134',10,1,1,26,68100.50,10,'Muito Satisfeito',2,NULL),(135,'2025-04-30','PED-135',20,1,1,15,39288.75,6,'Muito Satisfeito',1,NULL),(136,'2025-06-10','PED-136',35,1,3,18,46266.12,10,'Muito Satisfeito',3,NULL),(137,'2025-02-03','PED-137',21,1,2,7,17197.95,6,'Muito Satisfeito',1,NULL),(138,'2025-02-24','PED-138',21,1,3,11,28273.74,0,'Muito Insatisfeito',2,NULL),(139,'2025-03-15','PED-139',30,1,2,1,2456.85,0,'Muito Insatisfeito',2,NULL),(140,'2025-03-02','PED-140',8,1,3,18,46266.12,0,'Muito Insatisfeito',2,NULL),(141,'2025-06-29','PED-141',42,1,3,3,7711.02,0,'Muito Insatisfeito',1,NULL),(142,'2025-02-27','PED-142',15,1,2,28,68791.80,6,'Muito Satisfeito',2,NULL),(143,'2025-04-14','PED-143',12,1,3,23,59117.82,10,'Muito Satisfeito',3,NULL),(144,'2025-02-06','PED-144',18,1,1,28,73339.00,10,'Muito Satisfeito',3,NULL),(145,'2025-02-06','PED-145',25,1,1,29,75958.25,6,'Muito Satisfeito',3,NULL),(146,'2025-02-03','PED-146',2,1,1,5,13096.25,10,'Muito Satisfeito',1,NULL),(147,'2025-06-26','PED-147',44,1,1,16,41908.00,0,'Muito Insatisfeito',2,NULL),(148,'2025-01-31','PED-148',28,1,2,2,4913.70,10,'Muito Satisfeito',1,NULL),(149,'2025-01-29','PED-149',38,1,1,16,41908.00,6,'Muito Satisfeito',2,NULL),(150,'2025-06-17','PED-150',23,1,1,30,78577.50,10,'Muito Satisfeito',1,NULL),(151,'2025-03-31','PED-151',21,1,1,13,34050.25,0,'Muito Insatisfeito',2,NULL),(152,'2025-06-10','PED-152',11,1,3,9,23133.06,10,'Muito Satisfeito',3,NULL),(153,'2025-05-29','PED-153',12,1,3,25,64258.50,10,'Muito Satisfeito',1,NULL),(154,'2025-01-09','PED-154',35,1,3,14,35984.76,0,'Muito Insatisfeito',2,NULL),(155,'2025-06-21','PED-155',15,1,1,6,15715.50,0,'Muito Insatisfeito',2,NULL),(156,'2025-05-11','PED-156',31,1,3,27,69399.18,6,'Muito Satisfeito',2,NULL),(157,'2025-02-03','PED-157',38,1,1,6,15715.50,0,'Muito Insatisfeito',1,NULL),(158,'2025-03-10','PED-158',28,1,3,13,33414.42,10,'Muito Satisfeito',1,NULL),(159,'2025-02-04','PED-159',37,1,1,28,73339.00,0,'Muito Insatisfeito',2,NULL),(160,'2025-03-18','PED-160',32,1,3,15,38555.10,10,'Muito Satisfeito',1,NULL),(161,'2025-01-06','PED-161',14,1,3,30,77110.20,6,'Muito Satisfeito',3,NULL),(162,'2025-04-08','PED-162',3,1,1,11,28811.75,6,'Muito Satisfeito',1,NULL),(163,'2025-01-23','PED-163',41,1,2,18,44223.30,6,'Muito Satisfeito',3,NULL),(164,'2025-03-14','PED-164',48,1,3,22,56547.48,0,'Muito Insatisfeito',1,NULL),(165,'2025-04-15','PED-165',39,1,2,7,17197.95,6,'Muito Satisfeito',1,NULL),(166,'2025-02-03','PED-166',21,1,2,26,63878.10,0,'Muito Insatisfeito',2,NULL),(167,'2025-02-24','PED-167',4,1,3,22,56547.48,6,'Muito Satisfeito',1,NULL),(168,'2025-03-19','PED-168',32,1,1,15,39288.75,6,'Muito Satisfeito',2,NULL),(169,'2025-02-12','PED-169',41,1,2,7,17197.95,0,'Muito Insatisfeito',2,NULL),(170,'2025-06-04','PED-170',29,1,3,26,66828.84,0,'Muito Insatisfeito',2,NULL),(171,'2025-06-02','PED-171',6,1,3,28,71969.52,10,'Muito Satisfeito',2,NULL),(172,'2025-01-04','PED-172',32,1,1,20,52385.00,6,'Muito Satisfeito',3,NULL),(173,'2025-01-10','PED-173',25,1,1,30,78577.50,10,'Muito Satisfeito',1,NULL),(174,'2025-03-30','PED-174',40,1,2,2,4913.70,10,'Muito Satisfeito',2,NULL),(175,'2025-06-18','PED-175',29,1,2,7,17197.95,0,'Muito Insatisfeito',1,NULL),(176,'2025-02-20','PED-176',13,1,3,16,41125.44,6,'Muito Satisfeito',2,NULL),(177,'2025-06-12','PED-177',36,1,3,27,69399.18,10,'Muito Satisfeito',1,NULL),(178,'2025-04-15','PED-178',26,1,2,28,68791.80,6,'Muito Satisfeito',2,NULL),(179,'2025-04-02','PED-179',21,1,1,1,2619.25,6,'Muito Satisfeito',2,NULL),(180,'2025-05-30','PED-180',21,1,3,18,46266.12,0,'Muito Insatisfeito',1,NULL),(181,'2025-01-20','PED-181',17,1,1,23,60242.75,6,'Muito Satisfeito',2,NULL),(182,'2025-06-28','PED-182',19,1,3,4,10281.36,10,'Muito Satisfeito',2,NULL),(183,'2025-06-10','PED-183',45,1,1,7,18334.75,10,'Muito Satisfeito',2,NULL),(184,'2025-03-20','PED-184',41,1,3,10,25703.40,10,'Muito Satisfeito',2,NULL),(185,'2025-04-01','PED-185',14,1,2,4,9827.40,10,'Muito Satisfeito',2,NULL),(186,'2025-06-20','PED-186',46,1,2,28,68791.80,10,'Muito Satisfeito',3,NULL),(187,'2025-05-03','PED-187',41,1,2,10,24568.50,0,'Muito Insatisfeito',1,NULL),(188,'2025-03-29','PED-188',23,1,1,16,41908.00,10,'Muito Satisfeito',2,NULL),(189,'2025-03-20','PED-189',24,1,3,2,5140.68,0,'Muito Insatisfeito',3,NULL),(190,'2025-04-03','PED-190',37,1,3,3,7711.02,6,'Muito Satisfeito',1,NULL),(191,'2025-05-26','PED-191',46,1,2,20,49137.00,10,'Muito Satisfeito',2,NULL),(192,'2025-02-25','PED-192',7,1,3,25,64258.50,0,'Muito Insatisfeito',2,NULL),(193,'2025-03-27','PED-193',33,1,3,24,61688.16,10,'Muito Satisfeito',1,NULL),(194,'2025-03-18','PED-194',21,1,3,28,71969.52,6,'Muito Satisfeito',2,NULL),(195,'2025-02-20','PED-195',37,1,3,7,17992.38,10,'Muito Satisfeito',1,NULL),(196,'2025-06-04','PED-196',4,1,1,13,34050.25,10,'Muito Satisfeito',3,NULL),(197,'2025-06-13','PED-197',16,1,3,16,41125.44,6,'Muito Satisfeito',2,NULL),(198,'2025-05-14','PED-198',26,1,3,15,38555.10,0,'Muito Insatisfeito',1,NULL),(199,'2025-01-21','PED-199',2,1,2,1,2456.85,0,'Muito Insatisfeito',2,NULL),(200,'2025-05-18','PED-200',42,1,1,1,2619.25,0,'Muito Insatisfeito',2,NULL),(201,'2025-04-28','PED-201',9,1,1,29,75958.25,6,'Muito Satisfeito',1,NULL),(202,'2025-02-05','PED-202',48,1,1,20,52385.00,0,'Muito Insatisfeito',1,NULL),(203,'2025-01-03','PED-203',12,1,1,20,52385.00,0,'Muito Insatisfeito',2,NULL),(204,'2025-01-17','PED-204',22,1,2,18,44223.30,6,'Muito Satisfeito',3,NULL),(205,'2025-04-17','PED-205',37,1,3,23,59117.82,6,'Muito Satisfeito',1,NULL),(206,'2025-04-07','PED-206',48,1,2,24,58964.40,0,'Muito Insatisfeito',2,NULL),(207,'2025-01-13','PED-207',28,1,3,22,56547.48,6,'Muito Satisfeito',1,NULL),(208,'2025-03-05','PED-208',10,1,1,6,15715.50,6,'Muito Satisfeito',2,NULL),(209,'2025-05-07','PED-209',18,1,3,21,53977.14,10,'Muito Satisfeito',2,NULL),(210,'2025-04-03','PED-210',19,1,3,26,66828.84,0,'Muito Insatisfeito',2,NULL),(211,'2025-05-11','PED-211',17,1,2,20,49137.00,0,'Muito Insatisfeito',1,NULL),(212,'2025-05-31','PED-212',27,1,1,11,28811.75,6,'Muito Satisfeito',3,NULL),(213,'2025-05-02','PED-213',16,1,3,25,64258.50,6,'Muito Satisfeito',1,NULL),(214,'2025-05-30','PED-214',7,1,2,25,61421.25,10,'Muito Satisfeito',2,NULL),(215,'2025-01-19','PED-215',4,1,3,15,38555.10,0,'Muito Insatisfeito',2,NULL),(216,'2025-03-03','PED-216',27,1,2,8,19654.80,0,'Muito Insatisfeito',1,NULL),(217,'2025-06-22','PED-217',3,1,1,9,23573.25,10,'Muito Satisfeito',1,NULL),(218,'2025-03-09','PED-218',21,1,2,20,49137.00,10,'Muito Satisfeito',1,NULL),(219,'2025-04-03','PED-219',16,1,1,8,20954.00,0,'Muito Insatisfeito',2,NULL),(220,'2025-03-04','PED-220',13,1,1,16,41908.00,6,'Muito Satisfeito',1,NULL),(221,'2025-01-14','PED-221',39,1,1,5,13096.25,10,'Muito Satisfeito',1,NULL),(222,'2025-05-12','PED-222',3,1,2,1,2456.85,6,'Muito Satisfeito',1,NULL),(223,'2025-01-22','PED-223',5,1,3,3,7711.02,0,'Muito Insatisfeito',3,NULL),(224,'2025-05-07','PED-224',47,1,3,10,25703.40,6,'Muito Satisfeito',2,NULL),(225,'2025-03-02','PED-225',27,1,2,21,51593.85,0,'Muito Insatisfeito',2,NULL),(226,'2025-01-05','PED-226',45,1,2,22,54050.70,6,'Muito Satisfeito',1,NULL),(227,'2025-05-21','PED-227',26,1,1,19,49765.75,6,'Muito Satisfeito',2,NULL),(228,'2025-05-08','PED-228',43,1,1,25,65481.25,10,'Muito Satisfeito',3,NULL),(229,'2025-05-11','PED-229',39,1,2,24,58964.40,6,'Muito Satisfeito',1,NULL),(230,'2025-02-10','PED-230',35,1,2,16,39309.60,0,'Muito Insatisfeito',2,NULL),(231,'2025-04-23','PED-231',21,1,2,18,44223.30,10,'Muito Satisfeito',1,NULL),(232,'2025-01-08','PED-232',46,1,1,21,55004.25,10,'Muito Satisfeito',3,NULL),(233,'2025-06-15','PED-233',7,1,2,23,56507.55,0,'Muito Insatisfeito',1,NULL),(234,'2025-05-24','PED-234',41,1,1,3,7857.75,6,'Muito Satisfeito',3,NULL),(235,'2025-01-13','PED-235',4,1,3,9,23133.06,6,'Muito Satisfeito',1,NULL),(236,'2025-02-14','PED-236',47,1,3,11,28273.74,0,'Muito Insatisfeito',1,NULL),(237,'2025-02-16','PED-237',35,1,2,29,71248.65,10,'Muito Satisfeito',3,NULL),(238,'2025-04-23','PED-238',33,1,2,19,46680.15,0,'Muito Insatisfeito',3,NULL),(239,'2025-06-27','PED-239',24,1,1,1,2619.25,10,'Muito Satisfeito',2,NULL),(240,'2025-03-04','PED-240',36,1,3,28,71969.52,10,'Muito Satisfeito',1,NULL),(241,'2025-02-04','PED-241',20,1,1,21,55004.25,0,'Muito Insatisfeito',1,NULL),(242,'2025-01-20','PED-242',48,1,2,5,12284.25,6,'Muito Satisfeito',3,NULL),(243,'2025-05-03','PED-243',41,1,1,28,73339.00,6,'Muito Satisfeito',1,NULL),(244,'2025-04-02','PED-244',23,1,2,1,2456.85,10,'Muito Satisfeito',1,NULL),(245,'2025-03-29','PED-245',27,1,1,5,13096.25,10,'Muito Satisfeito',2,NULL),(246,'2025-03-10','PED-246',31,1,3,3,7711.02,10,'Muito Satisfeito',1,NULL),(247,'2025-06-04','PED-247',34,1,1,27,70719.75,0,'Muito Insatisfeito',3,NULL),(248,'2025-03-08','PED-248',32,1,2,6,14741.10,10,'Muito Satisfeito',1,NULL),(249,'2025-06-13','PED-249',13,1,3,10,25703.40,10,'Muito Satisfeito',3,NULL),(250,'2025-06-30','PED-250',25,1,1,4,10477.00,0,'Muito Insatisfeito',2,NULL),(251,'2025-04-13','PED-251',44,1,3,22,56547.48,0,'Muito Insatisfeito',1,NULL),(252,'2025-04-25','PED-252',32,1,3,8,20562.72,6,'Muito Satisfeito',2,NULL),(253,'2025-06-20','PED-253',46,1,2,18,44223.30,6,'Muito Satisfeito',3,NULL),(254,'2025-05-15','PED-254',29,1,2,2,4913.70,0,'Muito Insatisfeito',1,NULL),(255,'2025-05-22','PED-255',34,1,3,20,51406.80,6,'Muito Satisfeito',3,NULL),(256,'2025-05-26','PED-256',26,1,1,28,73339.00,6,'Muito Satisfeito',3,NULL),(257,'2025-02-01','PED-257',3,1,3,9,23133.06,10,'Muito Satisfeito',2,NULL),(258,'2025-03-29','PED-258',41,1,2,24,58964.40,0,'Muito Insatisfeito',3,NULL),(259,'2025-01-04','PED-259',33,1,3,7,17992.38,6,'Muito Satisfeito',3,NULL),(260,'2025-01-12','PED-260',15,1,3,6,15422.04,10,'Muito Satisfeito',2,NULL),(261,'2025-06-13','PED-261',20,1,3,3,7711.02,0,'Muito Insatisfeito',2,NULL),(262,'2025-05-03','PED-262',27,1,2,25,61421.25,10,'Muito Satisfeito',1,NULL),(263,'2025-04-01','PED-263',23,1,1,16,41908.00,10,'Muito Satisfeito',1,NULL),(264,'2025-01-04','PED-264',47,1,2,28,68791.80,10,'Muito Satisfeito',1,NULL),(265,'2025-03-31','PED-265',38,1,3,24,61688.16,10,'Muito Satisfeito',1,NULL),(266,'2025-05-27','PED-266',5,1,2,30,73705.50,0,'Muito Insatisfeito',1,NULL),(267,'2025-06-13','PED-267',37,1,1,18,47146.50,0,'Muito Insatisfeito',1,NULL),(268,'2025-04-08','PED-268',42,1,2,4,9827.40,10,'Muito Satisfeito',1,NULL),(269,'2025-02-22','PED-269',5,1,2,16,39309.60,0,'Muito Insatisfeito',3,NULL),(270,'2025-03-15','PED-270',20,1,1,29,75958.25,0,'Muito Insatisfeito',1,NULL),(271,'2025-03-01','PED-271',3,1,1,24,62862.00,0,'Muito Insatisfeito',1,NULL),(272,'2025-01-29','PED-272',5,1,3,9,23133.06,6,'Muito Satisfeito',1,NULL),(273,'2025-01-07','PED-273',18,1,2,2,4913.70,10,'Muito Satisfeito',2,NULL),(274,'2025-06-27','PED-274',12,1,3,7,17992.38,0,'Muito Insatisfeito',1,NULL),(275,'2025-02-24','PED-275',47,1,3,10,25703.40,6,'Muito Satisfeito',3,NULL),(276,'2025-06-11','PED-276',5,1,1,7,18334.75,0,'Muito Insatisfeito',2,NULL),(277,'2025-05-08','PED-277',14,1,2,17,41766.45,0,'Muito Insatisfeito',3,NULL),(278,'2025-03-31','PED-278',23,1,1,1,2619.25,6,'Muito Satisfeito',3,NULL),(279,'2025-02-15','PED-279',15,1,2,11,27025.35,10,'Muito Satisfeito',2,NULL),(280,'2025-02-02','PED-280',18,1,1,25,65481.25,0,'Muito Insatisfeito',2,NULL),(281,'2025-06-11','PED-281',43,1,1,19,49765.75,6,'Muito Satisfeito',2,NULL),(282,'2025-02-17','PED-282',43,1,3,29,74539.86,0,'Muito Insatisfeito',1,NULL),(283,'2025-04-26','PED-283',12,1,1,15,39288.75,0,'Muito Insatisfeito',1,NULL),(284,'2025-03-23','PED-284',48,1,1,17,44527.25,10,'Muito Satisfeito',1,NULL),(285,'2025-02-20','PED-285',39,1,1,17,44527.25,6,'Muito Satisfeito',2,NULL),(286,'2025-01-02','PED-286',22,1,1,13,34050.25,0,'Muito Insatisfeito',3,NULL),(287,'2025-05-15','PED-287',22,1,1,8,20954.00,6,'Muito Satisfeito',3,NULL),(288,'2025-02-09','PED-288',11,1,3,14,35984.76,0,'Muito Insatisfeito',3,NULL),(289,'2025-06-30','PED-289',35,1,1,6,15715.50,0,'Muito Insatisfeito',1,NULL),(290,'2025-01-01','PED-290',39,1,3,5,12851.70,0,'Muito Insatisfeito',2,NULL),(291,'2025-06-26','PED-291',28,1,2,27,66334.95,0,'Muito Insatisfeito',2,NULL),(292,'2025-02-20','PED-292',27,1,2,21,51593.85,6,'Muito Satisfeito',3,NULL),(293,'2025-01-24','PED-293',20,1,2,12,29482.20,0,'Muito Insatisfeito',1,NULL),(294,'2025-05-27','PED-294',41,1,1,3,7857.75,10,'Muito Satisfeito',3,NULL),(295,'2025-03-22','PED-295',37,1,2,12,29482.20,0,'Muito Insatisfeito',2,NULL),(296,'2025-03-29','PED-296',27,1,1,14,36669.50,0,'Muito Insatisfeito',3,NULL),(297,'2025-03-13','PED-297',14,1,3,2,5140.68,6,'Muito Satisfeito',1,NULL),(298,'2025-05-11','PED-298',47,1,2,2,4913.70,10,'Muito Satisfeito',3,NULL),(299,'2025-03-17','PED-299',33,1,2,1,2456.85,6,'Muito Satisfeito',1,NULL),(300,'2025-03-09','PED-300',12,1,2,7,17197.95,0,'Muito Insatisfeito',2,NULL),(301,'2026-06-18','PED-301',4,1,2,123,302192.55,3,'Muito Insatisfeito',1,'1323123'),(302,'2026-06-18','PED-302',1,1,1,3,7857.75,3,'Muito Insatisfeito',1,'dasd'),(303,'2026-06-18','PED-303',1,1,1,2,5238.50,9,'Muito Satisfeito',1,'Teste via Workbench'),(304,'2026-06-18','PED-304',1,1,1,2,5238.50,9,'Muito Satisfeito',1,'Teste via Workbench'),(305,'2026-06-18','PED-305',1,1,1,2,5238.50,9,'Muito Satisfeito',1,'Teste via Workbench'),(306,'2026-06-18','PED-306',1,1,1,2,5238.50,9,'Muito Satisfeito',1,'Teste via Workbench'),(307,'2026-07-05','PED-307',5,1,1,2341,6131664.25,1,'Muito Insatisfeito',1,NULL),(308,'2026-07-05','PED-308',3,1,2,14,34395.90,4,'Muito Insatisfeito',1,NULL),(309,'2026-07-05','PED-309',2,1,1,3,7857.75,10,'Muito Satisfeito',3,NULL),(310,'2026-07-05','PED-310',1,1,1,3,7857.75,10,'Muito Satisfeito',1,'Teste de inserção'),(311,'2026-07-06','PED-311',2,4,1,3123,8179917.75,10,'Muito Satisfeito',1,'dasdasdada'),(342,'2026-01-01','PED-312',1,1,1,10,26192.50,10,'Muito Satisfeito',1,'SP venda alta'),(343,'2026-01-02','PED-343',2,2,2,8,19654.80,9,'Muito Satisfeito',2,'SP venda'),(344,'2026-01-03','PED-344',3,1,3,7,17992.38,8,'Muito Satisfeito',1,'RJ venda'),(345,'2026-01-04','PED-345',4,2,2,6,14741.10,7,'Muito Satisfeito',2,'RJ venda'),(346,'2026-01-05','PED-346',5,1,1,12,31431.00,10,'Muito Satisfeito',1,'MG forte'),(347,'2026-01-06','PED-347',6,2,3,9,23133.06,9,'Muito Satisfeito',2,'MG venda'),(348,'2026-01-07','PED-348',7,3,4,11,36298.90,10,'Muito Satisfeito',1,'PR alto'),(349,'2026-01-08','PED-349',8,1,2,5,12284.25,6,'Muito Satisfeito',2,'PR médio'),(350,'2026-01-09','PED-350',9,2,1,13,34050.25,10,'Muito Satisfeito',1,'SC forte'),(351,'2026-01-10','PED-351',10,3,3,7,17992.38,8,'Muito Satisfeito',2,'SC venda'),(352,'2026-01-11','PED-352',11,1,4,9,29699.10,9,'Muito Satisfeito',1,'RS venda'),(353,'2026-01-12','PED-353',12,2,2,6,14741.10,7,'Muito Satisfeito',2,'RS venda'),(354,'2026-01-13','PED-354',13,3,1,14,36669.50,10,'Muito Satisfeito',1,'BA alto'),(355,'2026-01-14','PED-355',14,1,3,8,20562.72,8,'Muito Satisfeito',2,'BA médio'),(356,'2026-01-15','PED-356',15,2,2,10,24568.50,9,'Muito Satisfeito',1,'PE forte'),(357,'2026-01-16','PED-357',16,3,4,7,23099.30,7,'Muito Satisfeito',2,'PE venda'),(358,'2026-01-17','PED-358',17,1,1,11,28811.75,10,'Muito Satisfeito',1,'CE alto'),(359,'2026-01-18','PED-359',16,2,3,6,15422.04,8,'Muito Satisfeito',2,'CE venda'),(360,'2026-01-19','PED-360',18,3,2,15,36852.75,10,'Muito Satisfeito',1,'DF muito alto'),(361,'2026-01-20','PED-361',18,1,4,9,29699.10,9,'Muito Satisfeito',2,'DF venda'),(362,'2026-01-21','PED-362',19,2,1,8,20954.00,8,'Muito Satisfeito',1,'AM venda'),(363,'2026-01-22','PED-363',19,3,3,7,17992.38,7,'Muito Satisfeito',2,'AM venda'),(364,'2026-01-23','PED-364',20,1,2,10,24568.50,9,'Muito Satisfeito',1,'PA forte'),(365,'2026-01-24','PED-365',20,2,4,6,19799.40,6,'Muito Satisfeito',2,'PA venda');
+/*!40000 ALTER TABLE `registro` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tipo_pagamento`
+--
+
+DROP TABLE IF EXISTS `tipo_pagamento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tipo_pagamento` (
+  `id_tipo_pagamento` int NOT NULL AUTO_INCREMENT,
+  `nome_tipo` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_tipo_pagamento`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipo_pagamento`
+--
+
+LOCK TABLES `tipo_pagamento` WRITE;
+/*!40000 ALTER TABLE `tipo_pagamento` DISABLE KEYS */;
+INSERT INTO `tipo_pagamento` VALUES (1,'Boleto'),(2,'PIX'),(3,'Cartão');
+/*!40000 ALTER TABLE `tipo_pagamento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vendedor`
+--
+
+DROP TABLE IF EXISTS `vendedor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `vendedor` (
+  `id_vendedor` int NOT NULL AUTO_INCREMENT,
+  `nome_vendedor` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id_vendedor`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vendedor`
+--
+
+LOCK TABLES `vendedor` WRITE;
+/*!40000 ALTER TABLE `vendedor` DISABLE KEYS */;
+INSERT INTO `vendedor` VALUES (1,'Carlos S.'),(2,'Mariana Costa'),(3,'Lucas Ferreira'),(4,'Fernanda Alves'),(5,'Gabriel Martins'),(6,'Juliana Rocha');
+/*!40000 ALTER TABLE `vendedor` ENABLE KEYS */;
+UNLOCK TABLES;
+SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2026-07-06  9:05:09
