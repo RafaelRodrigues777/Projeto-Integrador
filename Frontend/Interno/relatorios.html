@@ -7,10 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
   <link rel="stylesheet" href="../style/interno.css">
-  
+
   <style>
     .formulario-grid {
       display: grid;
@@ -18,14 +17,17 @@
       gap: 20px;
       margin-top: 20px;
     }
+
     .campo-cheio {
       grid-column: 1 / -1;
     }
+
     .input-grupo {
       display: flex;
       flex-direction: column;
       gap: 6px;
     }
+
     .input-grupo label {
       font-size: 0.8rem;
       font-weight: 600;
@@ -33,7 +35,10 @@
       letter-spacing: 0.05em;
       color: var(--clr-ink);
     }
-    .input-grupo input, .input-grupo select, .input-grupo textarea {
+
+    .input-grupo input,
+    .input-grupo select,
+    .input-grupo textarea {
       padding: 10px 12px;
       border: 1px solid var(--border-ui);
       border-radius: 6px;
@@ -44,9 +49,22 @@
       transition: border-color 0.15s ease;
       width: 100%;
     }
-    .input-grupo input:focus, .input-grupo select:focus, .input-grupo textarea:focus {
+
+    .input-grupo input:focus,
+    .input-grupo select:focus,
+    .input-grupo textarea:focus {
       outline: none;
       border-color: var(--clr-steel);
+    }
+
+    .input-grupo select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23aaa' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -63,7 +81,6 @@
       <a class="sidebar__link" href="produto.html"><i class="ti ti-box"></i> Produtos</a>
       <a class="sidebar__link sidebar__link--ativo" href="relatorios.html"><i class="ti ti-file-analytics"></i> Relatórios</a>
       <a class="sidebar__link" href="dashboard.html"><i class="ti ti-chart-pie"></i> Dashboard</a>
-      
       <span class="sidebar__grupo-label">Conta</span>
       <a class="sidebar__link" href="configuracoes.html"><i class="ti ti-settings"></i> Configurações</a>
     </nav>
@@ -74,11 +91,11 @@
 
   <div class="conteudo-principal">
     <header class="topbar">
-      <span class="topbar__titulo" id="nome-pagina-atual">Novo Registro</span>
+      <span class="topbar__titulo">Novo Registro</span>
     </header>
 
     <main class="painel-conteudo">
-      
+
       <div class="painel-header">
         <h2 class="painel-header__titulo">Inserir Novo Pedido</h2>
         <p class="painel-header__subtitulo">Preencha as informações abaixo para registrar uma nova venda no sistema comercial.</p>
@@ -86,59 +103,68 @@
 
       <div class="container-tabela" style="padding: 32px; background: #ffffff;">
         <form id="form-novo-registro">
-          
-        <div class="formulario-grid">
-          
-          <div class="input-grupo">
-            <label for="data_pedido">Data do Pedido</label>
-            <input type="date" id="data_pedido" required />
-          </div>
+          <div class="formulario-grid">
 
-          <!-- CLIENTE: Continua select, mas a duplicidade será tratada no JS -->
-          <div class="input-grupo">
-            <label for="fk_id_cliente">Cliente</label>
-            <select id="fk_id_cliente" required>
-              <option value="">Selecione o Cliente</option>
-            </select>
-          </div>
+            <!-- DATA -->
+            <div class="input-grupo">
+              <label for="data_pedido">Data do Pedido</label>
+              <input type="date" id="data_pedido" required />
+            </div>
 
-          <!-- VENDEDOR: Agora você pode escrever ou selecionar da lista -->
-          <div class="input-grupo">
-            <label for="vendedor">Vendedor</label>
-            <input type="text" id="vendedor" list="lista-vendedores" placeholder="Digite ou selecione o vendedor" required />
-            <datalist id="lista-vendedores"></datalist>
-          </div>
+            <!-- CLIENTE — populado via GET /clientes → id_cliente, nome_cliente -->
+            <div class="input-grupo">
+              <label for="fk_id_cliente">Cliente</label>
+              <select id="fk_id_cliente" required>
+                <option value="">Carregando...</option>
+              </select>
+            </div>
 
-          <!-- PRODUTO: Agora você pode escrever ou selecionar da lista -->
-          <div class="input-grupo">
-            <label for="produto">Produto</label>
-            <input type="text" id="produto" list="lista-produtos" placeholder="Digite ou selecione o produto" required />
-            <datalist id="lista-produtos"></datalist>
-          </div>
+            <!-- VENDEDOR — populado via GET /vendedores → id_vendedor, nome_vendedor -->
+            <div class="input-grupo">
+              <label for="fk_id_vendedor">Vendedor</label>
+              <select id="fk_id_vendedor" required>
+                <option value="">Carregando...</option>
+              </select>
+            </div>
 
-          <div class="input-grupo">
-            <label for="quantidade">Quantidade</label>
-            <input type="number" id="quantidade" min="1" placeholder="Ex: 5" required />
-          </div>
+            <!-- PRODUTO — populado via GET /produtos → id_produto, nome_produto -->
+            <div class="input-grupo">
+              <label for="fk_id_produto">Produto</label>
+              <select id="fk_id_produto" required>
+                <option value="">Carregando...</option>
+              </select>
+            </div>
 
-          <div class="input-grupo">
-            <label for="fk_id_tipo_pagamento">Forma de Pagamento</label>
-            <select id="fk_id_tipo_pagamento" required>
-              <option value="">Selecione o Pagamento</option>
-            </select>
-          </div>
+            <!-- QUANTIDADE -->
+            <div class="input-grupo">
+              <label for="quantidade">Quantidade</label>
+              <input type="number" id="quantidade" min="1" placeholder="Ex: 5" required />
+            </div>
 
-          <div class="input-grupo">
-            <label for="nota_satisfacao">Nota de Satisfação (0 a 10)</label>
-            <input type="number" id="nota_satisfacao" min="0" max="10" placeholder="Ex: 9" required />
-          </div>
+            <!-- PAGAMENTO — populado via GET /tipos-pagamento → id_tipo_pagamento, nome_tipo -->
+            <div class="input-grupo">
+              <label for="fk_id_tipo_pagamento">Forma de Pagamento</label>
+              <select id="fk_id_tipo_pagamento" required>
+                <option value="">Carregando...</option>
+              </select>
+            </div>
 
-          <div class="input-grupo campo-cheio">
-            <label for="observacao">Observações do Registro</label>
-            <textarea id="observacao" rows="3" placeholder="Insira observações adicionais sobre o pedido... (Máx. 100 caracteres)" maxlength="100"></textarea>
-          </div>
+            <!-- NOTA — comentario_satisfacao gerado pelo trigger no banco -->
+            <div class="input-grupo">
+              <label for="nota_satisfacao">Nota de Satisfação (0 a 10)</label>
+              <input type="number" id="nota_satisfacao" min="0" max="10" placeholder="Ex: 9" required />
+            </div>
 
-        </div>
+            <!-- OBSERVAÇÕES — varchar(100), opcional -->
+            <div class="input-grupo campo-cheio">
+              <label for="observacao">Observações do Registro</label>
+              <textarea
+                id="observacao"
+                rows="3"
+                placeholder="Insira observações adicionais... (Máx. 100 caracteres)"
+                maxlength="100"
+              ></textarea>
+            </div>
 
           </div>
 
@@ -157,9 +183,3 @@
 <script src="../js/registro.js"></script>
 </body>
 </html>
-
-
-
-Corrija o cliente ta repetindo, eu quero que mostre apenas 1 de cada
-Eu quero inserir o nome do vendedor
-quero escrever o nome do produto, 

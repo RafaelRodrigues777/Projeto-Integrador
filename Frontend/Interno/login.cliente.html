@@ -1,396 +1,155 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login — Comercial Prime</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login</title>
 
-    :root {
-      --bg-page:    #eef1f3;
-      --bg-card:    #f8f8ec;
-      --clr-navy:   #243a69;
-      --clr-steel:  #5b88a5;
-      --clr-mist:   #bdcdd0;
-      --clr-slate:  #8ba6ac;
-      --clr-stone:  #6b7580;
-      --clr-ink:    #1e2630;
-      --clr-error:  #b04040;
-      --clr-success:#2e7d60;
-      --radius-sm:  6px;
-      --radius-md:  10px;
-      --radius-lg:  16px;
-      --transition: 0.22s ease;
-      --font:       'Inter', system-ui, sans-serif;
-    }
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    html, body {
-      height: 100%;
-      font-family: var(--font);
-      background-color: var(--bg-page);
-      color: var(--clr-ink);
-      -webkit-font-smoothing: antialiased;
-    }
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Inter', sans-serif;
+      }
 
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 1.5rem;
-    }
+      body {
+        background: linear-gradient(135deg, #FFFFFF, #EFF6FF);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #0F172A;
+      }
 
-    /* ---- Painel lateral esquerdo (decorativo) ---- */
-    .login-wrapper {
-      display: flex;
-      width: 100%;
-      max-width: 860px;
-      min-height: 520px;
-      background: var(--bg-card);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--clr-mist);
-      overflow: hidden;
-    }
+      .login-wrapper {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 20px 50px rgba(15, 23, 42, .10);
+        padding: 48px 40px;
+        width: 100%;
+        max-width: 420px;
+      }
 
-    .login-side {
-      flex: 1;
-      background: var(--clr-navy);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 2.5rem 2rem;
-      min-width: 0;
-    }
+      .login-wrapper h2 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #0F172A;
+        margin-bottom: 8px;
+      }
 
-    .login-side .brand {
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #e8eef6;
-    }
+      .login-wrapper p.subtitle {
+        font-size: 14px;
+        color: #64748B;
+        margin-bottom: 32px;
+      }
 
-    .login-side .tagline {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 0.75rem;
-    }
+      .logo {
+        font-size: 22px;
+        font-weight: 800;
+        color: #2563EB;
+        margin-bottom: 28px;
+        display: block;
+      }
 
-    .login-side h2 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #e8eef6;
-      line-height: 1.3;
-    }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
 
-    .login-side p {
-      font-size: 0.9rem;
-      color: var(--clr-mist);
-      line-height: 1.6;
-    }
+      input {
+        width: 100%;
+        padding: 14px 16px;
+        border: 1.5px solid #E2E8F0;
+        border-radius: 10px;
+        font-size: 14px;
+        color: #0F172A;
+        background: #F8FAFC;
+        outline: none;
+        transition: border-color .2s, box-shadow .2s;
+      }
 
-    .login-side .dots {
-      display: flex;
-      gap: 6px;
-    }
+      input::placeholder {
+        color: #94A3B8;
+      }
 
-    .login-side .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(189, 205, 208, 0.35);
-    }
+      input:focus {
+        border-color: #2563EB;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
+        background: #fff;
+      }
 
-    .login-side .dot.active {
-      background: var(--clr-steel);
-    }
+      .btn-primario {
+        width: 100%;
+        padding: 14px;
+        background: #2563EB;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0 8px 24px rgba(37, 99, 235, .25);
+        transition: background .2s, transform .2s;
+        margin-top: 4px;
+      }
 
-    /* ---- Formulário ---- */
-    .login-form-area {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 2.5rem 2.25rem;
-      min-width: 0;
-    }
+      .btn-primario:hover {
+        background: #1D4ED8;
+        transform: translateY(-2px);
+      }
 
-    .login-form-area header {
-      margin-bottom: 2rem;
-    }
+      .btn-primario:active {
+        transform: translateY(0);
+      }
 
-    .login-form-area header h1 {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--clr-ink);
-      margin-bottom: 0.3rem;
-    }
+      #msgLogin {
+        margin-top: 4px;
+        font-size: 13px;
+        text-align: center;
+        min-height: 20px;
+        color: #EF4444;
+      }
 
-    .login-form-area header p {
-      font-size: 0.875rem;
-      color: var(--clr-stone);
-    }
+      .forgot {
+        text-align: center;
+        margin-top: 4px;
+      }
 
-    /* Grupos de campo */
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-      margin-bottom: 1rem;
-    }
+      .forgot a {
+        font-size: 13px;
+        color: #2563EB;
+        text-decoration: none;
+        font-weight: 500;
+      }
 
-    .field label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--clr-stone);
-      letter-spacing: 0.04em;
-    }
+      .forgot a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
 
-    .input-wrap {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
+  <body>
 
-    .input-wrap .icon {
-      position: absolute;
-      left: 11px;
-      color: var(--clr-slate);
-      pointer-events: none;
-      line-height: 1;
-    }
+    <div class="login-wrapper">
+      <span class="logo">SupportTech</span>
 
-    .input-wrap input {
-      width: 100%;
-      padding: 0.6rem 0.85rem 0.6rem 2.1rem;
-      font-family: var(--font);
-      font-size: 0.9rem;
-      color: var(--clr-ink);
-      background: #f0f2f4;
-      border: 1px solid var(--clr-mist);
-      border-radius: var(--radius-sm);
-      outline: none;
-      transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
-      -webkit-appearance: none;
-    }
+      <h2>Login de Acesso</h2>
+      <p class="subtitle">Entre com suas credenciais para continuar.</p>
 
-    .input-wrap input::placeholder { color: #a0aab4; }
-
-    .input-wrap input:hover {
-      border-color: var(--clr-slate);
-      background: #f4f6f8;
-    }
-
-    .input-wrap input:focus {
-      border-color: var(--clr-steel);
-      background: #fff;
-      box-shadow: 0 0 0 3px rgba(91, 136, 165, 0.15);
-    }
-
-    /* Botão de mostrar senha */
-    .btn-toggle-pw {
-      position: absolute;
-      right: 10px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: var(--clr-slate);
-      padding: 0;
-      line-height: 1;
-      transition: color var(--transition);
-    }
-    .btn-toggle-pw:hover { color: var(--clr-steel); }
-
-    /* Link esqueci senha */
-    .forgot {
-      text-align: right;
-      margin-top: -0.5rem;
-      margin-bottom: 0.5rem;
-    }
-    .forgot a {
-      font-size: 0.8rem;
-      color: var(--clr-steel);
-      text-decoration: none;
-      transition: color var(--transition);
-    }
-    .forgot a:hover { color: var(--clr-navy); }
-
-    /* Botão submit */
-    .btn-submit {
-      width: 100%;
-      padding: 0.7rem 1rem;
-      background: var(--clr-navy);
-      border: none;
-      border-radius: var(--radius-sm);
-      font-family: var(--font);
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: #e8eef6;
-      cursor: pointer;
-      transition: background var(--transition), transform var(--transition);
-      margin-top: 0.5rem;
-    }
-    .btn-submit:hover { background: var(--clr-steel); }
-    .btn-submit:active { transform: scale(0.99); }
-
-    /* Mensagem de feedback */
-    #msgLogin {
-      margin-top: 0.85rem;
-      font-size: 0.82rem;
-      font-weight: 500;
-      min-height: 1.1em;
-      text-align: center;
-      border-radius: var(--radius-sm);
-      padding: 0;
-      transition: opacity var(--transition);
-    }
-
-    #msgLogin.erro {
-      background: rgba(176, 64, 64, 0.08);
-      border: 1px solid rgba(176, 64, 64, 0.2);
-      color: var(--clr-error);
-      padding: 0.5rem 0.75rem;
-    }
-
-    #msgLogin.ok {
-      background: rgba(46, 125, 96, 0.08);
-      border: 1px solid rgba(46, 125, 96, 0.2);
-      color: var(--clr-success);
-      padding: 0.5rem 0.75rem;
-    }
-
-    /* Divisor */
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin: 1.25rem 0;
-      color: var(--clr-mist);
-      font-size: 0.78rem;
-    }
-    .divider::before,
-    .divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--clr-mist);
-    }
-
-    /* Rodapé do form */
-    .form-footer {
-      text-align: center;
-      font-size: 0.8rem;
-      color: var(--clr-stone);
-      margin-top: 1.25rem;
-    }
-    .form-footer a {
-      color: var(--clr-steel);
-      font-weight: 600;
-      text-decoration: none;
-    }
-    .form-footer a:hover { color: var(--clr-navy); }
-
-    /* Ícones SVG embutidos */
-    .ico { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; display: inline-block; vertical-align: middle; }
-
-    /* Responsivo */
-    @media (max-width: 620px) {
-      .login-side { display: none; }
-      .login-form-area { padding: 2rem 1.5rem; }
-    }
-  </style>
-</head>
-<body>
-
-  <div class="login-wrapper">
-
-    <!-- Painel lateral -->
-    <div class="login-side">
-      <span class="brand">Comercial Prime</span>
-
-      <div class="tagline">
-        <h2>Área de<br/>Suporte Interno</h2>
-        <p>Acesse sua conta para gerenciar chamados, acompanhar tickets e monitorar os sistemas da sua empresa.</p>
-      </div>
-
-      <div class="dots">
-        <div class="dot active"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-      </div>
-    </div>
-
-    <!-- Formulário -->
-    <div class="login-form-area">
-      <header>
-        <h1>Entrar na conta</h1>
-        <p>Use suas credenciais de acesso corporativo.</p>
-      </header>
-
-      <form id="formulario" novalidate>
-
-        <div class="field">
-          <label for="email">E-mail</label>
-          <div class="input-wrap">
-            <span class="icon">
-              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-            </span>
-            <input type="email" id="email" name="email" placeholder="seu@email.com" autocomplete="email" required />
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="senha">Senha</label>
-          <div class="input-wrap">
-            <span class="icon">
-              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            </span>
-            <input type="password" id="senha" name="senha" placeholder="••••••••" autocomplete="current-password" required />
-            <button type="button" class="btn-toggle-pw" id="togglePw" aria-label="Mostrar senha">
-              <svg class="ico" id="iconOlho" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
-            </button>
-          </div>
-        </div>
-
-        <div class="forgot">
-          <a href="#">Esqueceu a senha?</a>
-        </div>
-
-        <button type="submit" class="btn-submit">Acesso Interno</button>
-
-        <div id="msgLogin" role="alert" aria-live="polite"></div>
-
+      <form id="formulario">
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="senha" placeholder="Senha">
+        <button type="submit" class="btn-primario">Acesso Interno</button>
+        <div id="msgLogin"></div>
+        <div class="forgot"><a href="#">Esqueci minha senha</a></div>
       </form>
-
-      <div class="divider">ou</div>
-
-      <div class="form-footer">
-        Sem acesso? <a href="#">Solicite ao administrador</a>
-      </div>
     </div>
 
-  </div>
+    <script type="module" src="../js/logins.js"></script>
 
-  <script>
-    const togglePw = document.getElementById('togglePw');
-    const senhaInput = document.getElementById('senha');
-    const iconOlho = document.getElementById('iconOlho');
-
-    togglePw.addEventListener('click', () => {
-      const visivel = senhaInput.type === 'text';
-      senhaInput.type = visivel ? 'password' : 'text';
-      iconOlho.innerHTML = visivel
-        ? '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>'
-        : '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
-    });
-  </script>
-
-  <script type="module" src="../js/logins.js"></script>
-</body>
+  </body>
 </html>
