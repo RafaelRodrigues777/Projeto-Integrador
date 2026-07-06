@@ -37,7 +37,6 @@
     }
 
     .input-grupo input,
-    .input-grupo select,
     .input-grupo textarea {
       padding: 10px 12px;
       border: 1px solid var(--border-ui);
@@ -51,20 +50,9 @@
     }
 
     .input-grupo input:focus,
-    .input-grupo select:focus,
     .input-grupo textarea:focus {
       outline: none;
       border-color: var(--clr-steel);
-    }
-
-    .input-grupo select {
-      appearance: none;
-      -webkit-appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23aaa' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 12px center;
-      padding-right: 32px;
-      cursor: pointer;
     }
   </style>
 </head>
@@ -97,68 +85,81 @@
     <main class="painel-conteudo">
 
       <div class="painel-header">
-        <h2 class="painel-header__titulo">Inserir Novo Pedido</h2>
-        <p class="painel-header__subtitulo">Preencha as informações abaixo para registrar uma nova venda no sistema comercial.</p>
+          <h2 class="painel-header__titulo">Cadastros do Sistema</h2>
+          <p class="painel-header__subtitulo">
+              Busque elementos existentes ou digite novas informações para criá-los automaticamente.
+          </p>
       </div>
 
       <div class="container-tabela" style="padding: 32px; background: #ffffff;">
         <form id="form-novo-registro">
           <div class="formulario-grid">
 
-            <!-- DATA -->
             <div class="input-grupo">
               <label for="data_pedido">Data do Pedido</label>
-              <input type="date" id="data_pedido" required />
+              <input type="date" name="data_pedido" id="data_pedido" required />
             </div>
 
-            <!-- CLIENTE — populado via GET /clientes → id_cliente, nome_cliente -->
             <div class="input-grupo">
-              <label for="fk_id_cliente">Cliente</label>
-              <select id="fk_id_cliente" required>
-                <option value="">Carregando...</option>
-              </select>
+              <label for="txt_cliente">Cliente</label>
+              <input type="text" id="txt_cliente" list="lista-clientes" placeholder="Busque ou digite o nome do cliente..." required />
+              <datalist id="lista-clientes"></datalist>
             </div>
 
-            <!-- VENDEDOR — populado via GET /vendedores → id_vendedor, nome_vendedor -->
+            <div class="input-grupo" id="grupo-cidade-cliente">
+              <label for="txt_cidade">Cidade do Cliente</label>
+              <input type="text" id="txt_cidade" list="lista-cidades" placeholder="Cidade (Se for cliente novo)..." />
+              <datalist id="lista-cidades"></datalist>
+            </div>
+
+            <div class="input-grupo" id="grupo-estado-cliente">
+              <label for="txt_estado">Estado (UF)</label>
+              <input type="text" id="txt_estado" placeholder="Ex: PR (Se for cliente novo)" maxlength="2" />
+            </div>
+
             <div class="input-grupo">
-              <label for="fk_id_vendedor">Vendedor</label>
-              <select id="fk_id_vendedor" required>
-                <option value="">Carregando...</option>
-              </select>
+              <label for="txt_vendedor">Vendedor</label>
+              <input type="text" id="txt_vendedor" list="lista-vendedores" placeholder="Busque ou digite o nome do vendedor..." required />
+              <datalist id="lista-vendedores"></datalist>
             </div>
 
-            <!-- PRODUTO — populado via GET /produtos → id_produto, nome_produto -->
             <div class="input-grupo">
-              <label for="fk_id_produto">Produto</label>
-              <select id="fk_id_produto" required>
-                <option value="">Carregando...</option>
-              </select>
+              <label for="txt_produto">Produto</label>
+              <input type="text" id="txt_produto" list="lista-produtos" placeholder="Busque ou digite o nome do produto..." required />
+              <datalist id="lista-produtos"></datalist>
             </div>
 
-            <!-- QUANTIDADE -->
+            <div class="input-grupo" id="grupo-categoria-produto">
+              <label for="txt_categoria">Categoria do Produto</label>
+              <input type="text" id="txt_categoria" list="lista-categorias" placeholder="Categoria (Se for produto novo)..." />
+              <datalist id="lista-categorias"></datalist>
+            </div>
+
+            <div class="input-grupo" id="grupo-valor-produto">
+              <label for="novo_valor_unitario">Valor Unitário (R$)</label>
+              <input type="number" id="novo_valor_unitario" step="0.01" min="0" placeholder="Ex: 29.90 (Se for produto novo)" />
+            </div>
+
             <div class="input-grupo">
               <label for="quantidade">Quantidade</label>
-              <input type="number" id="quantidade" min="1" placeholder="Ex: 5" required />
+              <input type="number" name="quantidade" id="quantidade" min="1" placeholder="Ex: 5" required />
             </div>
 
-            <!-- PAGAMENTO — populado via GET /tipos-pagamento → id_tipo_pagamento, nome_tipo -->
             <div class="input-grupo">
-              <label for="fk_id_tipo_pagamento">Forma de Pagamento</label>
-              <select id="fk_id_tipo_pagamento" required>
-                <option value="">Carregando...</option>
-              </select>
+              <label for="txt_tipo_pagamento">Forma de Pagamento</label>
+              <input type="text" id="txt_tipo_pagamento" list="lista-pagamentos" placeholder="Busque ou digite uma nova forma..." required />
+              <datalist id="lista-pagamentos"></datalist>
             </div>
 
-            <!-- NOTA — comentario_satisfacao gerado pelo trigger no banco -->
             <div class="input-grupo">
               <label for="nota_satisfacao">Nota de Satisfação (0 a 10)</label>
-              <input type="number" id="nota_satisfacao" min="0" max="10" placeholder="Ex: 9" required />
+              <input type="number" name="nota_satisfacao" id="nota_satisfacao" min="0" max="10" placeholder="Ex: 9" required />
             </div>
 
-            <!-- OBSERVAÇÕES — varchar(100), opcional -->
             <div class="input-grupo campo-cheio">
               <label for="observacao">Observações do Registro</label>
               <textarea
+                name="observacao"
                 id="observacao"
                 rows="3"
                 placeholder="Insira observações adicionais... (Máx. 100 caracteres)"
@@ -182,4 +183,4 @@
 
 <script src="../js/registro.js"></script>
 </body>
-</html>
+</html> 

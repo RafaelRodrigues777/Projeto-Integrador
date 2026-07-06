@@ -3,21 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Painel Administrativo</title>
+    <title>Painel Administrativo — Produtos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+    <link rel="stylesheet" href="../style/interno.css">
 
     <style>
-      * { box-sizing: border-box; margin: 0; padding: 0; }
+      * { 
+        box-sizing: border-box; 
+        margin: 0; 
+        padding: 0; 
+      }
 
-      body { font-family: sans-serif; background: #f5f5f3; color: #1a1a18; }
+      body { 
+        font-family: 'Inter', sans-serif; 
+        background: #f5f5f3; 
+        color: var(--clr-ink); 
+      }
 
-      .painel-container { display: flex; height: 100vh; }
+      .painel-container { 
+        display: flex; 
+        height: 100vh; 
+      }
 
       /* SIDEBAR */
       .sidebar {
         width: 220px;
-        background: #fff;
-        border-right: 1px solid #eee;
+        background: #ffffff;
+        border-right: 1px solid var(--border-ui);
         display: flex;
         flex-direction: column;
         padding: 20px 12px;
@@ -25,24 +40,26 @@
       }
 
       .sidebar__logo {
-        font-size: 15px;
+        font-size: 0.95rem;
         font-weight: 600;
         padding: 0 8px 20px;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid var(--border-ui);
         margin-bottom: 12px;
         display: flex;
         align-items: center;
         gap: 8px;
+        color: var(--clr-ink);
       }
 
       .sidebar__grupo-label {
-        font-size: 11px;
+        font-size: 0.7rem;
         color: #999;
         text-transform: uppercase;
         letter-spacing: 0.06em;
         padding: 0 8px;
         margin: 12px 0 6px;
         display: block;
+        font-weight: 600;
       }
 
       .sidebar__link {
@@ -51,71 +68,92 @@
         gap: 10px;
         padding: 8px 10px;
         border-radius: 8px;
-        font-size: 14px;
+        font-size: 0.88rem;
         color: #555;
         text-decoration: none;
         transition: background 0.15s, color 0.15s;
         width: 100%;
       }
 
-      .sidebar__link:hover { background: #f0f0ee; color: #1a1a18; }
-      .sidebar__link--ativo { background: #f0f0ee; color: #1a1a18; font-weight: 500; }
-      .sidebar__link i { font-size: 17px; flex-shrink: 0; }
+      .sidebar__link:hover { 
+        background: #f0f0ee; 
+        color: var(--clr-ink); 
+      }
+      
+      .sidebar__link--ativo { 
+        background: #f0f0ee; 
+        color: var(--clr-ink); 
+        font-weight: 500; 
+      }
+      
+      .sidebar__link i { 
+        font-size: 1.05rem; 
+        flex-shrink: 0; 
+      }
 
-      .sidebar__rodape { margin-top: auto; border-top: 1px solid #eee; padding-top: 12px; }
+      .sidebar__rodape { 
+        margin-top: auto; 
+        border-top: 1px solid var(--border-ui); 
+        padding-top: 12px; 
+      }
 
       /* MAIN */
-      .conteudo-principal { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+      .conteudo-principal { 
+        flex: 1; 
+        display: flex; 
+        flex-direction: column; 
+        overflow: hidden; 
+      }
 
       .topbar {
         height: 56px;
-        background: #fff;
-        border-bottom: 1px solid #eee;
+        background: #ffffff;
+        border-bottom: 1px solid var(--border-ui);
         display: flex;
         align-items: center;
         padding: 0 24px;
         flex-shrink: 0;
       }
 
-      .topbar__titulo { font-size: 15px; font-weight: 500; }
-
-      .topbar__acoes { margin-left: auto; display: flex; gap: 8px; }
-
-      /* BOTÕES */
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 7px 14px;
-        border-radius: 8px;
-        font-size: 13px;
-        cursor: pointer;
-        border: 1px solid #ccc;
-        background: transparent;
-        color: #1a1a18;
-        transition: background 0.15s, transform 0.1s;
+      .topbar__titulo { 
+        font-size: 0.95rem; 
+        font-weight: 500; 
+        color: var(--clr-ink);
       }
 
-      .btn:hover { background: #f0f0ee; }
-      .btn:active { transform: scale(0.98); }
-      .btn i { font-size: 15px; }
-
-      .btn--primario { background: #1a1a18; color: #fff; border-color: transparent; }
-      .btn--primario:hover { opacity: 0.85; background: #1a1a18; }
-      .btn--perigo { color: #c0392b; border-color: #f5c6c6; }
-      .btn--perigo:hover { background: #fff0f0; }
+      .topbar__acoes { 
+        margin-left: auto; 
+        display: flex; 
+        gap: 8px; 
+      }
 
       /* CONTEÚDO */
-      .painel-conteudo { flex: 1; padding: 24px; overflow-y: auto; }
+      .painel-conteudo { 
+        flex: 1; 
+        padding: 24px; 
+        overflow-y: auto; 
+      }
 
-      .painel-header { margin-bottom: 20px; }
-      .painel-header h2 { font-size: 18px; font-weight: 500; margin-bottom: 4px; }
-      .painel-header p { font-size: 13px; color: #777; }
+      .painel-header { 
+        margin-bottom: 20px; 
+      }
+      
+      .painel-header h2 { 
+        font-size: 1.15rem; 
+        font-weight: 500; 
+        margin-bottom: 4px; 
+        color: var(--clr-ink);
+      }
+      
+      .painel-header p { 
+        font-size: 0.82rem; 
+        color: #777; 
+      }
 
       /* TABELA */
       .container-tabela {
-        background: #fff;
-        border: 1px solid #eee;
+        background: #ffffff;
+        border: 1px solid var(--border-ui);
         border-radius: 12px;
         overflow: hidden;
       }
@@ -126,13 +164,17 @@
         align-items: center;
         justify-content: space-between;
         padding: 12px 16px;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid var(--border-ui);
         background: #fafaf8;
         gap: 12px;
         flex-wrap: wrap;
       }
 
-      .busca-wrapper { position: relative; flex: 1; max-width: 300px; }
+      .busca-wrapper { 
+        position: relative; 
+        flex: 1; 
+        max-width: 300px; 
+      }
 
       .busca-wrapper i {
         position: absolute;
@@ -140,45 +182,68 @@
         top: 50%;
         transform: translateY(-50%);
         color: #bbb;
-        font-size: 15px;
+        font-size: 0.95rem;
         pointer-events: none;
       }
 
       .busca-input {
         width: 100%;
-        padding: 7px 12px 7px 32px;
-        border: 1px solid #e0e0de;
-        border-radius: 8px;
-        font-size: 13px;
-        background: #fff;
-        color: #1a1a18;
+        padding: 8px 12px 8px 32px;
+        border: 1px solid var(--border-ui);
+        border-radius: 6px;
+        font-size: 0.82rem;
+        background: #ffffff;
+        color: var(--clr-ink);
         outline: none;
         transition: border-color 0.15s;
+        font-family: 'Inter', sans-serif;
       }
 
-      .busca-input:focus { border-color: #aaa; }
-      .busca-input::placeholder { color: #ccc; }
+      .busca-input:focus { 
+        border-color: var(--clr-steel); 
+      }
+      
+      .busca-input::placeholder { 
+        color: #ccc; 
+      }
 
-      .total-label { font-size: 12px; color: #aaa; white-space: nowrap; }
+      .total-label { 
+        font-size: 0.75rem; 
+        color: #aaa; 
+        white-space: nowrap; 
+      }
 
-      /* Tabela em si */
-      .tabela-dados { width: 100%; border-collapse: collapse; font-size: 13px; }
+      /* Estrutura dos Dados */
+      .tabela-dados { 
+        width: 100%; 
+        border-collapse: collapse; 
+        font-size: 0.82rem; 
+      }
 
-      .tabela-dados thead { background: #f5f5f3; border-bottom: 1px solid #eee; }
+      .tabela-dados thead { 
+        background: #f5f5f3; 
+        border-bottom: 1px solid var(--border-ui); 
+      }
 
       .tabela-dados th {
         padding: 11px 16px;
         text-align: left;
         font-weight: 600;
-        font-size: 11px;
+        font-size: 0.7rem;
         color: #999;
         text-transform: uppercase;
         letter-spacing: 0.05em;
         white-space: nowrap;
       }
 
-      .tabela-dados tbody tr:nth-child(even) { background: #fafaf8; }
-      .tabela-dados tbody tr:hover { background: #f0f0ee; transition: background 0.1s; }
+      .tabela-dados tbody tr:nth-child(even) { 
+        background: #fafaf8; 
+      }
+      
+      .tabela-dados tbody tr:hover { 
+        background: #f0f0ee; 
+        transition: background 0.1s; 
+      }
 
       .tabela-dados td {
         padding: 13px 16px;
@@ -187,31 +252,45 @@
         vertical-align: middle;
       }
 
-      .tabela-dados tbody tr:last-child td { border-bottom: none; }
+      .tabela-dados tbody tr:last-child td { 
+        border-bottom: none; 
+      }
 
       /* ID discreto */
-      .tabela-dados td:first-child { color: #ccc; font-size: 12px; }
+      .tabela-dados td:first-child { 
+        color: #ccc; 
+        font-size: 0.75rem; 
+      }
 
-      .nome-produto { font-weight: 500; color: #1a1a18; }
+      .nome-produto { 
+        font-weight: 500; 
+        color: var(--clr-ink); 
+      }
 
-      .alinhamento-direita { text-align: right !important; }
+      .alinhamento-direita { 
+        text-align: right !important; 
+      }
 
       /* Estado vazio/loading */
       .estado-vazio {
         text-align: center;
         padding: 48px 24px;
         color: #ccc;
-        font-size: 13px;
+        font-size: 0.82rem;
       }
 
-      .estado-vazio i { font-size: 34px; display: block; margin-bottom: 10px; }
+      .estado-vazio i { 
+        font-size: 2rem; 
+        display: block; 
+        margin-bottom: 10px; 
+      }
 
       /* Rodapé */
       .tabela-rodape {
         padding: 9px 16px;
-        border-top: 1px solid #eee;
+        border-top: 1px solid var(--border-ui);
         background: #fafaf8;
-        font-size: 12px;
+        font-size: 0.75rem;
         color: #bbb;
         text-align: right;
       }
@@ -219,7 +298,7 @@
       /* BADGES */
       .badge {
         display: inline-block;
-        font-size: 11px;
+        font-size: 0.7rem;
         padding: 3px 9px;
         border-radius: 99px;
         font-weight: 500;
@@ -236,13 +315,12 @@
   <body>
     <div class="painel-container">
 
-      <!-- SIDEBAR -->
       <aside class="sidebar">
         <div class="sidebar__logo">
           <i class="ti ti-building-store"></i> Meu Painel
         </div>
 
-        <nav>
+        <nav aria-label="Navegação do Painel">
           <span class="sidebar__grupo-label">Menu</span>
           <a class="sidebar__link sidebar__link--ativo" href="produto.html">
             <i class="ti ti-box"></i> Produtos
@@ -267,7 +345,6 @@
         </div>
       </aside>
 
-      <!-- MAIN -->
       <div class="conteudo-principal">
 
         <header class="topbar">
@@ -396,7 +473,6 @@
       observer.observe(document.getElementById('corpo-tabela-produtos'), { childList: true, subtree: true });
     </script>
 
-    <!-- Seu JS que busca do banco e popula o tbody -->
     <script src="../js/produto.js"></script>
   </body>
 </html>
