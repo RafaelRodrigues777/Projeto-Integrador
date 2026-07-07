@@ -1,0 +1,43 @@
+.formulario-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .campo-cheio {
+      grid-column: 1 / -1;
+    }
+
+    .input-grupo {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .input-grupo label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--clr-ink);
+    }
+
+    .input-grupo input,
+    .input-grupo textarea {
+      padding: 10px 12px;
+      border: 1px solid var(--border-ui);
+      border-radius: 6px;
+      background: #ffffff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--clr-ink);
+      transition: border-color 0.15s ease;
+      width: 100%;
+    }
+
+    .input-grupo input:focus,
+    .input-grupo textarea:focus {
+      outline: none;
+      border-color: var(--clr-steel);
+    }

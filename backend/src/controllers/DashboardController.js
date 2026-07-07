@@ -183,3 +183,26 @@ export const getFaturamentoSatisfacao = (req, res) => {
     });
 
 };
+
+// ==================== RN12: FATURAMENTO MENSUAL ====================
+
+export const getFaturamentoMensal = (req, res) => {
+    const sql = `
+        SELECT 
+            DATE_FORMAT(MIN(data_pedido), '%m/%Y') AS mes,
+            COALESCE(SUM(valor_total), 0) AS total_mes
+        FROM registro
+        WHERE data_pedido IS NOT NULL
+        GROUP BY YEAR(data_pedido), MONTH(data_pedido)
+        ORDER BY YEAR(data_pedido) ASC, MONTH(data_pedido) ASC;
+    `;
+
+    connectionComercial.query(sql, (err, result) => {
+        if (err) {
+            console.error("Erro ao buscar faturamento mensal:", err);
+            return res.status(500).json(err);
+        }
+
+        res.json(result);
+    });
+};

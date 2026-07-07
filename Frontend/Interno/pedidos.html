@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Painel Administrativo — Produtos</title>
+    <title>Painel Administrativo — Histórico de Pedidos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -15,29 +15,31 @@
   <body>
     <div class="painel-container">
 
-      <aside class="sidebar">
+      <!-- SIDEBAR ATUALIZADA COM A NOVA ABA -->
+        <aside class="sidebar">
         <div class="sidebar__logo">
-          <i class="ti ti-building-store"></i> Era Solutions
+            <i class="ti ti-building-store"></i> Era Solutions
         </div>
         <nav class="sidebar__nav">
-          <span class="sidebar__grupo-label">Menu</span>
-          <a class="sidebar__link" href="produto.html"><i class="ti ti-box"></i> Produtos</a>
-          <a class="sidebar__link" href="relatorios.html"><i class="ti ti-file-analytics"></i>  Novo Registro</a>
-          <a class="sidebar__link" href="pedidos.html"><i class="ti ti-receipt"></i> Histórico de Pedidos</a>
-          <a class="sidebar__link sidebar__link--ativo" href="dashboard.html"><i class="ti ti-chart-pie"></i> Dashboard</a>
+            <span class="sidebar__grupo-label">Menu</span>
+            <a class="sidebar__link" href="produto.html"><i class="ti ti-box"></i> Produtos</a>
+            <a class="sidebar__link" href="relatorios.html"><i class="ti ti-file-analytics"></i>  Novo Registro</a>
+            <a class="sidebar__link" href="pedidos.html"><i class="ti ti-receipt"></i> Histórico de Pedidos</a>
+            <a class="sidebar__link sidebar__link--ativo" href="dashboard.html"><i class="ti ti-chart-pie"></i> Dashboard</a>
         </nav>
         <div class="sidebar__rodape">
-          <a class="sidebar__link" href="../index.html"><i class="ti ti-logout"></i> Sair</a>
+            <a class="sidebar__link" href="../index.html"><i class="ti ti-logout"></i> Sair</a>
         </div>
-      </aside>
+        </aside>
 
+      <!-- CONTEÚDO PRINCIPAL -->
       <div class="conteudo-principal">
 
         <header class="topbar">
-          <span class="topbar__titulo">Produtos</span>
+          <span class="topbar__titulo">Histórico de Pedidos</span>
           <div class="topbar__acoes">
             <a href="relatorios.html" class="btn btn--primario" style="text-decoration: none;">
-              <i class="ti ti-plus"></i> Novo Produto
+              <i class="ti ti-plus"></i> Novo Pedido
             </a>
           </div>
         </header>
@@ -45,12 +47,13 @@
         <main class="painel-conteudo">
 
           <div class="painel-header">
-            <h2>Gerenciamento de Estoque</h2>
-            <p>Visualize e edite as informações dos seus produtos cadastrados.</p>
+            <h2>Relatório Geral de Vendas</h2>
+            <p>Visualize, filtre e consulte as informações detalhadas de todos os pedidos registrados.</p>
           </div>
 
           <div class="container-tabela">
 
+            <!-- FILTRO DE BUSCA DA TOOLBAR -->
             <div class="tabela-toolbar">
               <div class="busca-wrapper">
                 <i class="ti ti-search"></i>
@@ -58,27 +61,34 @@
                   class="busca-input"
                   type="text"
                   id="campo-busca"
-                  placeholder="Buscar produto..."
+                  placeholder="Buscar por cliente, produto, vendedor..."
                   oninput="filtrarTabela()"
                 />
               </div>
-              <span class="total-label" id="contador-produtos"></span>
+              <span class="total-label" id="contador-pedidos"></span>
             </div>
 
+            <!-- TABELA HISTÓRICO DE PEDIDOS -->
             <table class="tabela-dados">
               <thead>
                 <tr>
                   <th style="width:60px;">ID</th>
-                  <th>Produto</th>
-                  <th>Categoria</th>
-                  <th class="alinhamento-direita">Preço Unitário</th>
-                  <th style="width:70px; text-align: center;">Ações</th> </tr>
+                  <th>Data</th>
+                  <th>Cliente / Região</th>
+                  <th>Vendedor</th>
+                  <th>Produto (Cat.)</th>
+                  <th class="alinhamento-direita">Qtd × Unitário</th>
+                  <th class="alinhamento-direita">Total</th>
+                  <th>Pagamento</th>
+                  <th style="text-align: center;">Nota</th>
+                  <th>Obs.</th>
+                </tr>
               </thead>
-              <tbody id="corpo-tabela-produtos">
+              <tbody id="tabela-pedidos-corpo">
                 <tr id="linha-loading">
-                  <td colspan="5" class="estado-vazio">
+                  <td colspan="10" class="estado-vazio">
                     <i class="ti ti-loader"></i>
-                    Carregando produtos...
+                    Carregando histórico de pedidos...
                   </td>
                 </tr>
               </tbody>
@@ -91,16 +101,16 @@
       </div>
     </div>
 
-    <script>
-
+<script>
       function atualizarContador() {
-        const linhas = document.querySelectorAll('#corpo-tabela-produtos tr[data-linha]');
+        const linhas = document.querySelectorAll('#tabela-pedidos-corpo tr[data-linha]');
         const visiveis = [...linhas].filter(tr => tr.style.display !== 'none').length;
         const total = linhas.length;
-        document.getElementById('contador-produtos').textContent =
+
+        document.getElementById('contador-pedidos').textContent =
           visiveis === total
-            ? `${total} produto${total !== 1 ? 's' : ''}`
-            : `${visiveis} de ${total} produto${total !== 1 ? 's' : ''}`;
+            ? `${total} pedido${total !== 1 ? 's' : ''}`
+            : `${visiveis} de ${total} pedido${total !== 1 ? 's' : ''}`;
 
         document.getElementById('rodape-tabela').textContent =
           total > 0 ? `${total} registro${total !== 1 ? 's' : ''} no banco de dados` : '';
@@ -108,8 +118,8 @@
 
       function filtrarTabela() {
         const termo = document.getElementById('campo-busca').value.toLowerCase();
-        const linhas = document.querySelectorAll('#corpo-tabela-produtos tr[data-linha]');
-        const tbody = document.getElementById('corpo-tabela-produtos');
+        const linhas = document.querySelectorAll('#tabela-pedidos-corpo tr[data-linha]');
+        const tbody = document.getElementById('tabela-pedidos-corpo');
 
         linhas.forEach(tr => {
           tr.style.display = tr.textContent.toLowerCase().includes(termo) ? '' : 'none';
@@ -122,9 +132,9 @@
           if (!semResultado) {
             const tr = document.createElement('tr');
             tr.id = 'sem-resultado';
-            tr.innerHTML = `<td colspan="5" class="estado-vazio">
+            tr.innerHTML = `<td colspan="10" class="estado-vazio">
               <i class="ti ti-mood-sad"></i>
-              Nenhum produto encontrado para "<strong>${termo}</strong>"
+              Nenhum pedido encontrado para "<strong>${termo}</strong>"
             </td>`;
             tbody.appendChild(tr);
           }
@@ -137,19 +147,19 @@
 
       const observer = new MutationObserver(() => {
         const loading = document.getElementById('linha-loading');
-        const temDados = document.querySelectorAll('#corpo-tabela-produtos tr:not(#linha-loading):not(#sem-resultado)').length > 0;
+        const temDados = document.querySelectorAll('#tabela-pedidos-corpo tr:not(#linha-loading):not(#sem-resultado)').length > 0;
         if (loading && temDados) loading.remove();
 
-        document.querySelectorAll('#corpo-tabela-produtos tr:not([data-linha]):not(#linha-loading):not(#sem-resultado)').forEach(tr => {
+        document.querySelectorAll('#tabela-pedidos-corpo tr:not([data-linha]):not(#linha-loading):not(#sem-resultado)').forEach(tr => {
           tr.setAttribute('data-linha', '');
         });
 
         atualizarContador();
       });
 
-      observer.observe(document.getElementById('corpo-tabela-produtos'), { childList: true, subtree: true });
+      observer.observe(document.getElementById('tabela-pedidos-corpo'), { childList: true, subtree: true });
     </script>
 
-    <script src="../js/produto.js"></script>
+    <script src="../js/pedidos.js"></script>
   </body>
 </html>

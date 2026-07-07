@@ -1,13 +1,6 @@
 import { connectionComercial } from '../database/db.js';
 
 class RelatoriosController {
-
-    // ==========================
-    // METODO PRINCIPAL: REGISTRAR PEDIDO
-    // ==========================
-    // ==========================
-    // METODO PRINCIPAL: REGISTRAR PEDIDO (Corrigido)
-    // ==========================
     async criar(req, res) {
         const {
             data_pedido,
@@ -43,13 +36,16 @@ class RelatoriosController {
             }
         );
     }
-    // ==========================
-    // MÉTODOS DE LISTAGEM (Caso o seu frontend use para carregar as datalists)
-    // ==========================
+
     async listarClientes(req, res) {
-        const sql = 'SELECT id_cliente, nome_cliente FROM cliente ORDER BY nome_cliente ASC';
+        // O DISTINCT garante que o banco só trará um registro de cada cliente
+        const sql = 'SELECT DISTINCT id_cliente, nome_cliente FROM cliente ORDER BY nome_cliente ASC';
+        
         connectionComercial.query(sql, (err, results) => {
-            if (err) return res.status(500).send(err);
+            if (err) {
+                console.error("Erro ao listar clientes:", err);
+                return res.status(500).send(err);
+            }
             res.json(results);
         });
     }
@@ -78,9 +74,45 @@ class RelatoriosController {
         });
     }
 
-    // ==========================
-    // CADASTRAR CLIENTE 
-    // ==========================
+    // =========================================================================
+    // NOVO MÉTODO: BUSCAR TODOS OS PEDIDOS COM DETALHES COMPLETOS (HISTÓRICO)
+    // =========================================================================
+    async listarPedidosCompletos(req, res) {
+        const sql = `
+            SELECT 
+                r.id_registro,
+                r.data_pedido,
+                r.quantidade,
+                r.nota_satisfacao,
+                r.observacao,
+                c.nome_cliente,
+                l.cidade,
+                l.estado,
+                v.nome_vendedor,
+                p.nome_produto,
+                p.valor_unitario,
+                (r.quantidade * p.valor_unitario) AS valor_total,
+                cat.nome_categoria,
+                tp.nome_tipo AS forma_pagamento
+            FROM registro r
+            INNER JOIN cliente c ON r.fk_id_cliente = c.id_cliente
+            INNER JOIN localizacao l ON c.fk_id_localizacao = l.id_localizacao
+            INNER JOIN vendedor v ON r.fk_id_vendedor = v.id_vendedor
+            INNER JOIN produto p ON r.fk_id_produto = p.id_produto
+            INNER JOIN categoria cat ON p.fk_id_categoria = cat.id_categoria
+            INNER JOIN tipo_pagamento tp ON r.fk_id_tipo_pagamento = tp.id_tipo_pagamento
+            ORDER BY r.data_pedido DESC, r.id_registro DESC
+        `;
+
+        connectionComercial.query(sql, (err, results) => {
+            if (err) {
+                console.error("Erro ao buscar histórico de pedidos:", err);
+                return res.status(500).json({ error: "Erro interno no servidor" });
+            }
+            res.json(results);
+        });
+    }
+
     async criarCliente(req, res) {
         const { nome_cliente, fk_id_localizacao } = req.body;
 
@@ -106,9 +138,6 @@ class RelatoriosController {
         );
     }
 
-    // ==========================
-    // CADASTRAR VENDEDOR
-    // ==========================
     async criarVendedor(req, res) {
         const { nome_vendedor } = req.body;
 
@@ -134,9 +163,6 @@ class RelatoriosController {
         );
     }
 
-    // ==========================
-    // CADASTRAR PRODUTO
-    // ==========================
     async criarProduto(req, res) {
         const { nome_produto, valor_unitario, fk_id_categoria } = req.body;
 
@@ -162,9 +188,6 @@ class RelatoriosController {
         );
     }
 
-    // ==========================
-    // CADASTRAR CATEGORIA
-    // ==========================
     async criarCategoria(req, res) {
         const { nome_categoria } = req.body;
 
@@ -183,9 +206,6 @@ class RelatoriosController {
         });
     }
 
-    // ==========================
-    // CADASTRAR LOCALIZAÇÃO
-    // ==========================
     async criarLocalizacao(req, res) {
         const { cidade, estado } = req.body;
 
@@ -204,9 +224,6 @@ class RelatoriosController {
         });
     }
 
-    // ==========================
-    // CADASTRAR TIPO PAGAMENTO
-    // ==========================
     async criarTipoPagamento(req, res) {
         const { nome_tipo } = req.body;
 

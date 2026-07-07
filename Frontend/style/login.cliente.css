@@ -1,0 +1,134 @@
+:root{
+  --clr-ink: #0F172A;
+  --clr-steel: #3E5C76;
+  --clr-canvas: #F7F9FB;
+  --border-ui: #E2E8F0;
+  --clr-white: #FFFFFF;
+  --clr-muted: #64748B;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: var(--clr-canvas);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr-ink);
+}
+
+.login-wrapper {
+  background: var(--clr-white);
+  border: 1px solid var(--border-ui);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, .08);
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.login-wrapper h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--clr-ink);
+  margin-bottom: 8px;
+}
+
+.login-wrapper p.subtitle {
+  font-size: 14px;
+  color: var(--clr-muted);
+  margin-bottom: 32px;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--clr-ink);
+  margin-bottom: 28px;
+  display: block;
+}
+
+.logo span {
+  color: var(--clr-steel);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid var(--border-ui);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--clr-ink);
+  background: var(--clr-canvas);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+input::placeholder {
+  color: #94A3B8;
+}
+
+input:focus {
+  border-color: var(--clr-steel);
+  box-shadow: 0 0 0 3px rgba(62, 92, 118, .15);
+  background: var(--clr-white);
+}
+
+.btn-primario {
+  width: 100%;
+  padding: 14px;
+  background: var(--clr-ink);
+  color: var(--clr-white);
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+  margin-top: 4px;
+}
+
+.btn-primario:hover {
+  background: var(--clr-steel);
+  transform: translateY(-2px);
+}
+
+.btn-primario:active {
+  transform: translateY(0);
+}
+
+#msgLogin {
+  margin-top: 4px;
+  font-size: 13px;
+  text-align: center;
+  min-height: 20px;
+  color: #EF4444;
+}
+
+.forgot {
+  text-align: center;
+  margin-top: 4px;
+}
+
+.forgot a {
+  font-size: 13px;
+  color: var(--clr-steel);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.forgot a:hover {
+  text-decoration: underline;
+}

@@ -9,52 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
   <link rel="stylesheet" href="../style/interno.css">
-
-  <style>
-    .formulario-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
-    }
-
-    .campo-cheio {
-      grid-column: 1 / -1;
-    }
-
-    .input-grupo {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .input-grupo label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--clr-ink);
-    }
-
-    .input-grupo input,
-    .input-grupo textarea {
-      padding: 10px 12px;
-      border: 1px solid var(--border-ui);
-      border-radius: 6px;
-      background: #ffffff;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-      color: var(--clr-ink);
-      transition: border-color 0.15s ease;
-      width: 100%;
-    }
-
-    .input-grupo input:focus,
-    .input-grupo textarea:focus {
-      outline: none;
-      border-color: var(--clr-steel);
-    }
-  </style>
+  <link rel="stylesheet" href="../style/relatorio.css">
 </head>
 <body>
 
@@ -62,15 +17,14 @@
 
   <aside class="sidebar">
     <div class="sidebar__logo">
-      <i class="ti ti-building-store"></i> Meu Painel
+      <i class="ti ti-building-store"></i> Era Solutions
     </div>
-    <nav class="sidebar__nav" aria-label="Navegação do Painel">
+    <nav class="sidebar__nav">
       <span class="sidebar__grupo-label">Menu</span>
       <a class="sidebar__link" href="produto.html"><i class="ti ti-box"></i> Produtos</a>
-      <a class="sidebar__link sidebar__link--ativo" href="relatorios.html"><i class="ti ti-file-analytics"></i> Relatórios</a>
-      <a class="sidebar__link" href="dashboard.html"><i class="ti ti-chart-pie"></i> Dashboard</a>
-      <span class="sidebar__grupo-label">Conta</span>
-      <a class="sidebar__link" href="configuracoes.html"><i class="ti ti-settings"></i> Configurações</a>
+      <a class="sidebar__link" href="relatorios.html"><i class="ti ti-file-analytics"></i>  Novo Registro</a>
+      <a class="sidebar__link" href="pedidos.html"><i class="ti ti-receipt"></i> Histórico de Pedidos</a>
+      <a class="sidebar__link sidebar__link--ativo" href="dashboard.html"><i class="ti ti-chart-pie"></i> Dashboard</a>
     </nav>
     <div class="sidebar__rodape">
       <a class="sidebar__link" href="../index.html"><i class="ti ti-logout"></i> Sair</a>

@@ -10,12 +10,22 @@ const port = 8080
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+// ==========================================
+// MIDDLEWARES (Devem vir ANTES das rotas!)
+// ==========================================
 app.use(cors({ origin: '*' }))
-app.use(express.static(path.join(__dirname, '..', 'Frontend')))
 
-// sobe uma pasta do backend e entra no Frontend/Interno
+// LINHA ESSENCIAL QUE FALTAVA: Permite que o Express leia dados enviados via JSON e URL
+app.use(express.json()) 
+app.use(express.urlencoded({ extended: true }))
+
+// Arquivos Estáticos do Frontend
+app.use(express.static(path.join(__dirname, '..', 'Frontend')))
 app.use(express.static(path.join(__dirname, '..', 'Frontend', 'Interno')))
 
+// ==========================================
+// INICIALIZAÇÃO DAS ROTAS
+// ==========================================
 initRoutes(app)
 
 app.get('/', (req, res) => {

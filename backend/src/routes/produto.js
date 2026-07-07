@@ -1,9 +1,12 @@
 import { Router } from 'express'
-import { listarProdutos } from '../controllers/ProdutoController.js'
+import { listarProdutos, excluirProduto } from '../controllers/ProdutoController.js'
 
 const router = Router()
 
-// Deixamos apenas a rota de listagem (GET)
+// Rota para buscar todos os produtos (usada para preencher a tabela)
 router.get('/produtos', listarProdutos)
+
+// Rota para excluir um produto individual pelo ID (ativada pelo botão de lixeira)
+router.delete('/produtos/:id', excluirProduto)
 
 export default router

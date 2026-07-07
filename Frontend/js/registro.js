@@ -81,14 +81,32 @@ async function carregarDatalist(idDatalist, urlEndpoint, chaveId, chaveTextoOrFn
         const response = await fetch(urlEndpoint);
         if (!response.ok) return; // Se a rota não existir (404), sai sem quebrar o código
         const dados = await response.json();
+        
+        // 1. CORREÇÃO ESSENCIAL: Limpa as opções antigas do datalist visual antes de repopular
         datalist.innerHTML = '';
+        
+        // Criamos um conjunto temporário para monitorar duplicados nesta execução
+        const valoresInseridos = new Set();
+
         dados.forEach(item => {
             const texto = ehFn ? chaveTextoOrFn(item) : item[chaveTextoOrFn];
+            
             if (texto) {
+                const textoLower = texto.trim().toLowerCase();
+
+                // 2. CORREÇÃO ESSENCIAL: Se o texto já foi processado nesta rodada, pula para o próximo
+                if (valoresInseridos.has(textoLower)) {
+                    return;
+                }
+
+                // Adiciona ao validador de duplicados
+                valoresInseridos.add(textoLower);
+
                 const option = document.createElement('option');
                 option.value = texto;
                 datalist.appendChild(option);
-                mapaArmazenamento[texto.toLowerCase()] = item[chaveId] || item.id_localizacao || item.id_categoria;
+                
+                mapaArmazenamento[textoLower] = item[chaveId] || item.id_localizacao || item.id_categoria;
             }
         });
     } catch (e) { 
